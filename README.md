@@ -4,17 +4,17 @@
 
 Học kỳ 1, Năm học 2023-2024
 
-**MSSV 1** : 
+**MSSV 1** : B2005893  
 
-**Họ tên SV 1**:
+**Họ tên SV 1**: Nguyễn Võ Thuận Thiên
 
-**MSSV 2**:
+**MSSV 2**: B2005853  
 
-**Họ tên SV 2**:
+**Họ tên SV 2**: Nguyễn Thanh Phát
 
-**Lớp học phần**:
-
-**Tên dự án**:
+**Lớp học phần**: M01
+ 
+**Tên dự án**: E-commerce
 
 ## Recommended IDE Setup
 
