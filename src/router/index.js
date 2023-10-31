@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import Home from '../views/HomeView.vue';
 import About from '../views/AboutView.vue';
 import AddCategory from '../views/Category/AddCategory.vue';
+import Category from "../views/Category/Category.vue";
 
 const routes = [
   {
@@ -16,9 +17,14 @@ const routes = [
     component: About
   },
   {
-    path: '/AddCategory',
+    path: '/admin/category/add',
     name: 'AddCategory',
     component: AddCategory
+  },
+  {
+    path: '/admin/category',
+    name: 'Category',
+    component: Category
   }
 ]
 
