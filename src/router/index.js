@@ -4,6 +4,7 @@ import Home from '../views/HomeView.vue';
 import About from '../views/AboutView.vue';
 import AddCategory from '../views/Category/AddCategory.vue';
 import Category from '../views/Category/Category.vue';
+import EditCategory from "../views/Category/EditCategory.vue"
 import Product from '../views/Product/Product.vue';
 import Admin from "../views/Admin.vue";
 import AddProduct from "../views/Product/AddProduct.vue";
@@ -29,6 +30,14 @@ const routes = [
     name: 'Category',
     component: Category
   },
+
+  // category edit
+  {
+    path: '/admin/category/:id',
+    name: 'EditCategory',
+    component: EditCategory
+  },
+
   // admin home page
   {
     path: '/admin',
@@ -40,12 +49,16 @@ const routes = [
     name: 'AdminProduct',
     component: Product
   },
+
   // add product
   {
     path: '/admin/product/new',
     name: 'AddProduct',
     component: AddProduct
-  }
+  },
+
+
+
 ]
 
 // const router = new VueRouter({

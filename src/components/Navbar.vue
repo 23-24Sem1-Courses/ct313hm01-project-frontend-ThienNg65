@@ -3,8 +3,9 @@
     <!-- Navbar content -->
     <!--    Logo-->
     <router-link class="navbar-brand" :to="{ name: 'Home' }">
-      <img id="logo" src="../assets/icon.png" />
+      <h3 id="logo">E-Commerce</h3>
     </router-link>
+
     <!--    Burger Button-->
     <button
       class="navbar-toggler"
@@ -17,7 +18,9 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <br />
       <!--      Search Bar-->
       <form class="form-inline ml-auto mr-auto">
         <div class="input-group">
@@ -47,6 +50,7 @@
           </div>
         </div>
       </form>
+      <br />
       <router-link :to="{ name: 'Admin' }"> Admin </router-link>
     </div>
   </nav>
