@@ -8,13 +8,18 @@
     @fetchData="fetchData"
   >
   </router-view>
+
+  <!-- footer -->
+  <Footer />
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
+import Footer from './components/Footer.vue';
 import axios from 'axios';
 export default {
-  components: { Navbar },
+  // eslint-disable-next-line vue/no-reserved-component-names
+  components: { Navbar, Footer },
   data() {
     return {
       baseURL: 'https://limitless-lake-55070.herokuapp.com/',
