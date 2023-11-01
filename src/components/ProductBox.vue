@@ -19,8 +19,7 @@
 <script>
 export default {
   name: 'ProductBox',
-  props: ['product'],
-  methods: {}
+  props: ['product']
 };
 </script>
 <style scoped>
