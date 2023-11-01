@@ -13,6 +13,7 @@ import ShowDetails from "../views/Product/ShowDetails.vue";
 import ListProducts from "../views/Category/ListProducts.vue";
 import Signup from "../views/Signup.vue";
 import Signin from '../views/Signin.vue';
+import WishList from '../views/Product/WishList.vue'
 
 const routes = [
   {
@@ -95,7 +96,14 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin
+  },
+  {
+    path: '/wishlist',
+    name: 'WishList',
+    component: WishList,
   }
+
+
 
 ]
 

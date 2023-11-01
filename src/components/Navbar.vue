@@ -55,8 +55,16 @@
             Accounts
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarAccount">
-            <router-link class="dropdown-item" :to="{ name: 'Signup' }">Sign up </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Signin' }">Sign in </router-link>
+            <router-link v-if="token" class="dropdown-item" :to="{ name: 'WishList' }"
+              >Wishlist
+            </router-link>
+            <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signup' }"
+              >Sign up
+            </router-link>
+            <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signin' }"
+              >Sign in
+            </router-link>
+            <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign out </a>
           </div>
         </li>
       </ul>
@@ -66,7 +74,21 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Navbar'
+  name: 'Navbar',
+  data() {
+    return {
+      token: null
+    };
+  },
+  methods: {
+    signout() {
+      localStorage.removeItem('token');
+      this.token = null;
+    }
+  },
+  mounted() {
+    this.token = localStorage.getItem('token');
+  }
 };
 </script>
 <style scoped>
