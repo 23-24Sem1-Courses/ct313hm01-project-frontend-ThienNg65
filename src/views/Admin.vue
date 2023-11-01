@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+  <br />
   <router-link :to="{ name: 'Category' }">
     <button class="btn btn-primary btn-lg">Admin Category</button>
   </router-link>

@@ -24,7 +24,7 @@
 <script>
 import ProductBox from '../../components/ProductBox.vue';
 export default {
-  props: ['products'],
-  components: { ProductBox }
+  components: { ProductBox },
+  props: ['products']
 };
 </script>
