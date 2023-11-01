@@ -2,38 +2,26 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h4 class="pt-3">Edit Product</h4>
+        <h4 class="pt-3">Edit Category</h4>
       </div>
     </div>
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
-        <form v-if="product">
+        <form v-if="category">
           <div class="form-group">
-            <label> Category</label>
-            <select class="form-control" v-model="product.categoryId" required>
-              <option v-for="category of categories" :key="category.id" :value="category.id">
-                {{ category.categoryName }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" v-model="product.name" required />
+            <label>Category Name</label>
+            <input type="text" class="form-control" v-model="category.categoryName" required />
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" class="form-control" v-model="product.description" required />
+            <input type="text" class="form-control" v-model="category.description" required />
           </div>
           <div class="form-group">
             <label>Image URL</label>
-            <input type="text" class="form-control" v-model="product.imageURL" required />
+            <input type="text" class="form-control" v-model="category.imageUrl" required />
           </div>
-          <div class="form-group">
-            <label>Price</label>
-            <input type="number" class="form-control" v-model="product.price" required />
-          </div>
-          <button type="button" class="btn btn-primary" @click="editProduct">Submit</button>
+          <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
         </form>
       </div>
       <div class="col-3"></div>
@@ -46,21 +34,22 @@ import swal from 'sweetalert';
 export default {
   data() {
     return {
-      product: null,
+      category: null,
       id: null
     };
   },
-  props: ['baseURL', 'categories', 'products'],
+  props: ['baseURL', 'categories'],
   methods: {
-    async editProduct() {
-      console.log('product', this.product);
+    async editCategory() {
+      delete this.category['products'];
+      console.log('category', this.category);
       await axios
-        .post(`${this.baseURL}product/update/${this.id}`, this.product)
+        .post(`${this.baseURL}category/update/${this.id}`, this.category)
         .then(() => {
           this.$emit('fetchData');
-          this.$router.push({ name: 'AdminProduct' });
+          this.$router.push({ name: 'Category' });
           swal({
-            text: 'product has been updated successfully',
+            text: 'category has been updated successfully',
             icon: 'success'
           });
         })
@@ -69,7 +58,7 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id;
-    this.product = this.products.find((product) => product.id == this.id);
+    this.category = this.categories.find((category) => category.id == this.id);
   }
 };
 </script>

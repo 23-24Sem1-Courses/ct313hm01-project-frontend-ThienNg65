@@ -9,6 +9,9 @@ import Product from '../views/Product/Product.vue';
 import Admin from "../views/Admin.vue";
 import AddProduct from "../views/Product/AddProduct.vue";
 import EditProduct from "../views/Product/EditProduct.vue";
+import ShowDetails from "../views/Product/ShowDetails.vue";
+import ListProducts from "../views/Category/ListProducts.vue";
+
 
 const routes = [
   {
@@ -20,6 +23,13 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+
+  // category detail page
+  {
+    path: '/category/show/:id',
+    name: 'ListProducts',
+    component: ListProducts
   },
   {
     path: '/admin/category/add',
@@ -63,7 +73,14 @@ const routes = [
     path: '/admin/product/:id',
     name: 'EditProduct',
     component: EditProduct
-  }
+  },
+
+  // Product detail
+  {
+    path: '/admin/product/:id',
+    name: 'ShowDetails',
+    component: ShowDetails
+  },
 
 ]
 

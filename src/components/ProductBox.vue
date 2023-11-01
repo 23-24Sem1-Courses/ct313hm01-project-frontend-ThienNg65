@@ -8,7 +8,9 @@
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
+      <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
+        <h5 class="card-title">{{ product.name }}</h5>
+      </router-link>
       <p class="card-text">{{ product.description.substring(0, 65) }}...</p>
       <router-link
         :to="{ name: 'EditProduct', params: { id: product.id } }"
@@ -28,5 +30,11 @@ export default {
 <style scoped>
 .card-img-top {
   object-fit: cover;
+}
+a {
+  text-decoration: none;
+}
+.card-title {
+  color: #484848;
 }
 </style>

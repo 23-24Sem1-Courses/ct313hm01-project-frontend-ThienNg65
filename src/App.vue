@@ -2,14 +2,14 @@
   <Navbar />
   <router-view
     v-if="categories && products"
+    style="min-height: 60vh"
     :baseURL="baseURL"
     :categories="categories"
     :products="products"
     @fetchData="fetchData"
   >
   </router-view>
-
-  <!-- footer -->
+  <!--  footer-->
   <Footer />
 </template>
 
