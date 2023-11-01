@@ -11,7 +11,8 @@ import AddProduct from "../views/Product/AddProduct.vue";
 import EditProduct from "../views/Product/EditProduct.vue";
 import ShowDetails from "../views/Product/ShowDetails.vue";
 import ListProducts from "../views/Category/ListProducts.vue";
-
+import Signup from "../views/Signup.vue";
+import Signin from '../views/Signin.vue';
 
 const routes = [
   {
@@ -81,6 +82,20 @@ const routes = [
     name: 'ShowDetails',
     component: ShowDetails
   },
+
+
+  // sign up and signin
+
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: Signin
+  }
 
 ]
 
