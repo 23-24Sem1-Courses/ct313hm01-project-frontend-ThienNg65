@@ -13,7 +13,8 @@ import ShowDetails from "../views/Product/ShowDetails.vue";
 import ListProducts from "../views/Category/ListProducts.vue";
 import Signup from "../views/Signup.vue";
 import Signin from '../views/Signin.vue';
-import WishList from '../views/Product/WishList.vue'
+import WishList from '../views/Product/WishList.vue';
+import Cart from '../views/Cart.vue'
 
 const routes = [
   {
@@ -79,7 +80,7 @@ const routes = [
 
   // Product detail
   {
-    path: '/admin/product/:id',
+    path: '/admin/product/detail/:id',
     name: 'ShowDetails',
     component: ShowDetails
   },
@@ -101,9 +102,13 @@ const routes = [
     path: '/wishlist',
     name: 'WishList',
     component: WishList,
+  },
+
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
-
-
 
 ]
 

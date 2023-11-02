@@ -47,9 +47,21 @@
           </div>
         </div>
       </form>
-      <!-- dropdown for browse -->
-      <!-- dropdown for account -->
-      <ul class="navbar-nav mr-auto">
+
+      <!-- Container of drop-down -->
+      <ul class="navbar-nav ml-auto">
+        <!-- dropdown for browse -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" data-toggle="dropdown">
+            Browse
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarAccount">
+            <router-link class="dropdown-item" :to="{ name: 'Home' }">Home </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'Home' }">Product </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'Category' }">Category </router-link>
+          </div>
+        </li>
+        <!-- dropdown for account -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" data-toggle="dropdown">
             Accounts
@@ -66,6 +78,13 @@
             </router-link>
             <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign out </a>
           </div>
+        </li>
+
+        <!-- Shopping Cart Item -->
+        <li class="nav-item">
+          <router-link class="text-light" :to="{ name: 'Cart' }">
+            <i class="fa fa-shopping-cart" style="font-size: 36px"></i>
+          </router-link>
         </li>
       </ul>
     </div>
