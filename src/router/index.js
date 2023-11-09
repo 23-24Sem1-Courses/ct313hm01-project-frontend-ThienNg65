@@ -16,6 +16,11 @@ import Signin from '../views/Signin.vue';
 import WishList from '../views/Product/WishList.vue';
 import Cart from '../views/Cart.vue'
 
+import Success from '../views/payment/Success.vue';
+import Failed from '../views/payment/Failed.vue'
+
+import Checkout from '../views/Checkout/Checkout.vue'
+
 const routes = [
   {
     path: '/',
@@ -108,7 +113,26 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
-  }
+  },
+
+  // success and fail page
+  {
+    path: '/payment/success',
+    name: 'PaymentSuccess',
+    component: Success,
+  },
+  {
+    path: '/payment/failed',
+    name: 'PaymentFail',
+    component: Failed,
+  },
+  // checkout
+
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout,
+  },
 
 ]
 
@@ -119,6 +143,7 @@ const routes = [
 // })
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(),
   routes,
 });
 
