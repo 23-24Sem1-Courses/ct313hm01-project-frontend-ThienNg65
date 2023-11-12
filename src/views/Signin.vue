@@ -25,7 +25,7 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 export default {
-  props: ['baseURL'],
+  props: [],
   data() {
     return {
       email: null,
@@ -40,7 +40,7 @@ export default {
         password: this.password
       };
       await axios
-        .post(`${this.baseURL}user/login`, body)
+        .post(`/api/user/login`, body)
         .then((res) => {
           localStorage.setItem('token', res.data.token);
           swal({

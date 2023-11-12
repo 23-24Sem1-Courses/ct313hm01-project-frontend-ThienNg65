@@ -48,7 +48,11 @@ export default {
       // fetch cart item if token is present i.e logged in
       if (this.token) {
         axios
-          .get(`${this.baseURL}cart/?token=${this.token}`)
+          .get(`/api/cart/`, {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            }
+          })
           .then((res) => {
             const result = res.data;
             this.cartCount = result.cartItems.length;

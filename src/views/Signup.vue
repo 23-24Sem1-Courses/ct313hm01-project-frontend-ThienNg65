@@ -58,7 +58,7 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 export default {
-  props: ['baseURL'],
+  props: [],
   data() {
     return {
       email: null,
@@ -81,7 +81,7 @@ export default {
         };
         console.log('user', user);
         await axios
-          .post(`${this.baseURL}user/register`, user)
+          .post(`/api/user/register`, user)
           .then(() => {
             this.$router.replace('/');
             swal({

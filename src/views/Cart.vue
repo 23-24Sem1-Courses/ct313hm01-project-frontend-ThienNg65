@@ -17,7 +17,7 @@
       <div class="col-2"></div>
       <div class="col-md-3 embed-responsive embed-responsive-16by9">
         <img
-          :src="cartItem.product.imageURL"
+          :src="cartItem.imageURL"
           alt=""
           class="w-100 card-image-top embed-responsive-item"
           style="object-fit: cover"
@@ -28,22 +28,20 @@
       <div class="col-md-5 px-3">
         <div class="card-block px-3">
           <h6 class="card-title">
-            <router-link :to="{ name: 'ShowDetails', params: { id: cartItem.product.id } }">
-              {{ cartItem.product.name }}
+            <router-link :to="{ name: 'ShowDetails', params: { id: cartItem.productId } }">
+              {{ cartItem.name }}
             </router-link>
           </h6>
 
-          <p class="mb-0 font-weight-bold" id="item-price">
-            $ {{ cartItem.product.price }} per unit
-          </p>
+          <p class="mb-0 font-weight-bold" id="item-price">$ {{ cartItem.price }} per unit</p>
           <p class="mb-0" style="float: left">Quantity:{{ cartItem.quantity }}</p>
         </div>
         <p class="mb-0" style="float: right">
           Total:
-          <span class="font-weight-bold"> $ {{ cartItem.product.price * cartItem.quantity }} </span>
+          <span class="font-weight-bold"> $ {{ cartItem.price * cartItem.quantity }} </span>
         </p>
         <br />
-        <a href="#" class="text-right" @click="deleteItem(cartItem.id)">Remove from cart </a>
+        <a href="#" class="text-right" @click="deleteItem(cartItem.productId)">Remove from cart </a>
       </div>
       <div class="col-2"></div>
       <div class="col-12"><hr /></div>
@@ -66,12 +64,16 @@ export default {
       totalCost: 0
     };
   },
-  props: ['baseURL'],
+  props: [],
   methods: {
     // fetch All items in cart
     listCartItems() {
       axios
-        .get(`${this.baseURL}cart/?token=${this.token}`)
+        .get(`/api/cart/`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          }
+        })
         .then((res) => {
           const result = res.data;
           this.cartItems = result.cartItems;
@@ -80,8 +82,17 @@ export default {
         .catch((err) => console.log('err', err));
     },
     deleteItem(itemId) {
+      console.log(itemId);
       axios
-        .delete(`${this.baseURL}cart/delete/${itemId}/?token=${this.token}`)
+        .delete(
+          `/api/cart/`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            }
+          },
+          { productId: itemId }
+        )
         .then((res) => {
           if (res.status == 200) {
             this.$router.go(0);

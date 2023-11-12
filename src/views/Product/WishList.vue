@@ -30,11 +30,15 @@ export default {
       products: null
     };
   },
-  props: ['baseURL'],
+  props: [],
   methods: {
     fetchWishList() {
       axios
-        .get(`${this.baseURL}wishlist/${this.token}`)
+        .get(`/api/wishlist/all`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          }
+        })
         .then((data) => {
           this.products = data.data;
         })
