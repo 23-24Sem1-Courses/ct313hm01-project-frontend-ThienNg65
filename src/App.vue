@@ -17,13 +17,15 @@
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import axios from 'axios';
+import config from './config/config';
 export default {
   // eslint-disable-next-line vue/no-reserved-component-names
   components: { Navbar, Footer },
   data() {
     return {
-      // baseURL: 'https://limitless-lake-55070.herokuapp.com/',
-      baseURL: 'http://localhost:3000/api/',
+
+      // add config api server into app
+      baseURL: config.server.baseUrl,
       products: null,
       categories: null,
       cartCount: 0
