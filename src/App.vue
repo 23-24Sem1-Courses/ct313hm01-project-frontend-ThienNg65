@@ -3,7 +3,6 @@
   <router-view
     v-if="categories && products"
     style="min-height: 60vh"
-    :baseURL="baseURL"
     :categories="categories"
     :products="products"
     @fetchData="fetchData"
@@ -17,15 +16,11 @@
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import axios from 'axios';
-import config from './config/config';
 export default {
   // eslint-disable-next-line vue/no-reserved-component-names
   components: { Navbar, Footer },
   data() {
     return {
-
-      // add config api server into app
-      baseURL: config.server.baseUrl,
       products: null,
       categories: null,
       cartCount: 0
@@ -35,7 +30,7 @@ export default {
     async fetchData() {
       // api call to get all the categories
       await axios
-        .get(this.baseURL + 'category/')
+        .get('/api/category/')
         .then((res) => {
           this.categories = res.data;
         })
@@ -44,7 +39,7 @@ export default {
       // api call to get the products
 
       await axios
-        .get(this.baseURL + 'product/')
+        .get('/api/product/')
         .then((res) => {
           this.products = res.data;
         })
