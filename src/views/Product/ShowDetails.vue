@@ -55,7 +55,7 @@ export default {
       wishListString: 'Add to wishlist'
     };
   },
-  props: ['baseURL', 'products', 'categories'],
+  props: ['products', 'categories'],
   methods: {
     addToWishlist() {
       if (!this.token) {
@@ -69,7 +69,7 @@ export default {
       }
       // add item to wishlist
       axios
-        .post(`${this.baseURL}wishlist/add?token=${this.token}`, {
+        .post(`/api/wishlist/add?token=${this.token}`, {
           id: this.product.id
         })
         .then((res) => {
@@ -102,7 +102,7 @@ export default {
       // add to cart
 
       axios
-        .post(`${this.baseURL}/cart/add?token=${this.token}`, {
+        .post(`/api//cart/add?token=${this.token}`, {
           productId: this.id,
           quantity: this.quantity
         })

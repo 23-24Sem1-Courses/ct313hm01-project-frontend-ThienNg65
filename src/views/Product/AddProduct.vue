@@ -46,7 +46,7 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 export default {
-  props: ['baseURL', 'categories'],
+  props: ['categories'],
   data() {
     return {
       id: null,
@@ -68,7 +68,7 @@ export default {
       };
 
       axios
-        .post(this.baseURL + 'product/add', newProduct)
+        .post('/api/product/add', newProduct)
         .then(() => {
           this.$router.push({ name: 'AdminProduct' });
           swal({

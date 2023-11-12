@@ -24,11 +24,11 @@ export default {
   },
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Checkout',
-  props: ['baseURL'],
+  props: [],
   methods: {
     getAllItems() {
       axios
-        .get(`${this.baseURL}cart/?token=${this.token}`)
+        .get(`/api/cart/?token=${this.token}`)
         .then((response) => {
           if (response.status == 200) {
             let products = response.data;
@@ -47,7 +47,7 @@ export default {
     goToCheckout() {
       console.log('checkoutBodyArray', this.checkoutBodyArray);
       axios
-        .post(`${this.baseURL}order/create-checkout-session`, this.checkoutBodyArray)
+        .post(`/api/order/create-checkout-session`, this.checkoutBodyArray)
         .then((response) => {
           localStorage.setItem('sessionId', response.data.sessionId);
           console.log('session', response.data);

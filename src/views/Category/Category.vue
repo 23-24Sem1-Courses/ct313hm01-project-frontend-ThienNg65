@@ -26,11 +26,7 @@ export default {
   name: 'Category',
   props: ['categories'],
   components: { CategoryBox },
-  data() {
-    return {
-      baseURL: 'https://limitless-lake-55070.herokuapp.com'
-    };
-  },
+  data() {},
   methods: {},
   mounted() {}
 };
