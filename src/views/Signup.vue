@@ -81,11 +81,11 @@ export default {
         };
         console.log('user', user);
         await axios
-          .post(`${this.baseURL}user/signup`, user)
+          .post(`${this.baseURL}user/register`, user)
           .then(() => {
             this.$router.replace('/');
             swal({
-              text: 'User signup successful, please login',
+              text: 'User register successful, please login',
               icon: 'success'
             });
           })

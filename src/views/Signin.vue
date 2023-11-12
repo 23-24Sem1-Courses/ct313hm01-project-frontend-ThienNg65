@@ -40,7 +40,7 @@ export default {
         password: this.password
       };
       await axios
-        .post(`${this.baseURL}user/signIn`, body)
+        .post(`${this.baseURL}user/login`, body)
         .then((res) => {
           localStorage.setItem('token', res.data.token);
           swal({
