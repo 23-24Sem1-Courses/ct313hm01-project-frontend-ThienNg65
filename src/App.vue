@@ -30,7 +30,7 @@ export default {
     async fetchData() {
       // api call to get all the categories
       await axios
-        .get('/api/category/')
+        .get('/api/category/all')
         .then((res) => {
           this.categories = res.data;
         })
@@ -39,7 +39,7 @@ export default {
       // api call to get the products
 
       await axios
-        .get('/api/product/')
+        .get('/api/product/all')
         .then((res) => {
           this.products = res.data;
         })
