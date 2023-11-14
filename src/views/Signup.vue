@@ -55,7 +55,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import authService from '../services/auth.service';
 import swal from 'sweetalert';
 export default {
   props: [],
@@ -73,15 +73,15 @@ export default {
       e.preventDefault();
       if (this.password === this.confirmPassword) {
         // call signup api
+        // TODO : add more information
         const user = {
           email: this.email,
           firstName: this.firstName,
           lastName: this.lastName,
           password: this.password
         };
-        console.log('user', user);
-        await axios
-          .post(`/api/user/register`, user)
+        await authService
+          .register(user)
           .then(() => {
             this.$router.replace('/');
             swal({

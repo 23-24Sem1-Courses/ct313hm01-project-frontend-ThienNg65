@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import authService from '../services/auth.service';
 import swal from 'sweetalert';
 export default {
   props: [],
@@ -35,12 +35,12 @@ export default {
   methods: {
     async signin(e) {
       e.preventDefault();
-      const body = {
+      const credentials = {
         email: this.email,
         password: this.password
       };
-      await axios
-        .post(`/api/user/login`, body)
+      await authService
+        .login(credentials)
         .then((res) => {
           localStorage.setItem('token', res.data.token);
           swal({
