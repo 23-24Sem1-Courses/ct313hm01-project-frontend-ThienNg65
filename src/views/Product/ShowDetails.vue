@@ -69,9 +69,17 @@ export default {
       }
       // add item to wishlist
       axios
-        .post(`/api/wishlist/add?token=${this.token}`, {
-          id: this.product.id
-        })
+        .post(
+          `/api/wishlist/add`,
+          {
+            productId: this.product.id
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            }
+          }
+        )
         .then((res) => {
           if (res.status === 201) {
             this.wishListString = 'Added to Wishlist';
@@ -102,10 +110,18 @@ export default {
       // add to cart
 
       axios
-        .post(`/api//cart/add?token=${this.token}`, {
-          productId: this.id,
-          quantity: this.quantity
-        })
+        .post(
+          `/api/cart/add`,
+          {
+            productId: this.id,
+            quantity: this.quantity
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            }
+          }
+        )
         .then((res) => {
           if (res.status == 201) {
             swal({
