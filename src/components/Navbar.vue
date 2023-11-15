@@ -1,117 +1,46 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!-- Navbar content -->
-    <!--    Logo-->
+  <div class="header navbar-dark bg-dark w-auto h-50">
     <router-link class="navbar-brand" :to="{ name: 'Home' }">
       <h3>E-Commerce</h3>
     </router-link>
-    <!--    Burger Button-->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!--      Search Bar-->
-      <!-- <form class="form-inline ml-auto mr-auto">
-        <div class="input-group">
-          <input
-            size="100"
-            type="text"
-            class="form-control"
-            placeholder="Search Items"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="search-button-navbar">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-search"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </form> -->
 
-      <!-- dropdown for browse -->
-      <ul class="navbar-nav ml-auto">
-        <!-- SEARCH -->
-        <li class="nav-item">
-          <button @click="toggleSearch">Search</button>
-          <form v-show="showSearch">
-            <input type="text" v-model="searchTerm" />
-            <button @click="submitSearch">Search</button>
-          </form>
-        </li>
-        <!-- END SEARCH -->
+    <nav class="navbar">
+      <router-link :to="{ name: 'Home' }">Home </router-link>
+      <router-link :to="{ name: 'SearchView' }">Shop</router-link>
+      <router-link :to="{ name: 'WishList' }">Wishlist </router-link>
+    </nav>
 
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link text-light dropdown-toggle"
-            href="#"
-            id="navbarAccount"
-            data-toggle="dropdown"
-          >
-            Browse
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarAccount">
-            <router-link class="dropdown-item" :to="{ name: 'Home' }">Home </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Home' }">Product </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Home' }">Category </router-link>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-light"
-            href="#"
-            id="navbarAccount"
-            data-toggle="dropdown"
-          >
-            Accounts
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarAccount">
-            <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signup' }"
-              >Sign up
-            </router-link>
+    <div class="icons">
+      <div id="menu-btn" class="fas fa-bars menu-btn" @click="showNav"></div>
+      <router-link :to="{ name: 'Cart' }">
+        <div class="fas fa-shopping-cart cart"></div>
+      </router-link>
 
-            <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signin' }"
-              >Sign in
-            </router-link>
+      <div v-if="!token" class="fas fa-user account">
+        <ul class="drop-down-select">
+          <li>
+            <router-link :to="{ name: 'Signin' }">login</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'Signup' }">register</router-link>
+          </li>
+        </ul>
+      </div>
 
-            <router-link v-else class="dropdown-item" :to="{ name: 'WishList' }"
-              >Wishlist
-            </router-link>
-            <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign out </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <div id="cart" style="position: relative">
-            <span id="nav-cart-count">{{ cartCount }}</span>
-            <router-link class="text-light" :to="{ name: 'Cart' }">
-              <i class="fa fa-shopping-cart" style="font-size: 36px"></i>
-            </router-link>
-          </div>
-        </li>
-      </ul>
-      <!-- dropdown for account -->
+      <div v-if="token" class="fas fa-user account" style="background: #f38609; color: white">
+        <ul class="drop-down-select">
+          <!-- <li>
+            <router-link :to="{ OrderPage }">My Orders</router-link>
+          </li> -->
+          <li>
+            <router-link @click="signout" to="/">Sign out</router-link>
+          </li>
+        </ul>
+      </div>
     </div>
-  </nav>
+  </div>
 </template>
+
 <script>
 import swal from 'sweetalert';
 export default {
@@ -126,12 +55,18 @@ export default {
     };
   },
   methods: {
-    toggleSearch() {
-      this.showSearch = !this.showSearch;
+    showNav: function () {
+      let navbar = document.querySelector('.header .navbar');
+      navbar.classList.toggle('active');
     },
-    submitSearch() {
-      // Perform search action using the searchTerm
+    showLog: function () {
+      let mq = window.matchMedia('(max-width: 768px)');
+      if (mq.matches) {
+        let log = document.querySelector('.drop-down-select');
+        log.classList.toggle('active');
+      }
     },
+
     signout() {
       localStorage.removeItem('token');
       this.token = null;
@@ -148,36 +83,154 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-#logo {
-  width: 150px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.nav-link {
-  color: rgba(255, 255, 255);
-}
-
-#search-button-navbar {
-  background-color: #febd69;
-  border-color: #febd69;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-
-#nav-cart-count {
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  height: 15px;
-  width: 15px;
-  font-size: 15px;
-  align-items: center;
-
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 9%;
+}
 
+.header .logo {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #130f40;
+}
+
+.header .logo img {
+  padding-right: 0.5rem;
+  color: #27ae60;
+}
+
+.header .navbar a {
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  color: #666;
+}
+
+.header .navbar a:hover {
+  color: #27ae60;
+}
+
+.header .navbar a.router-link-exact-active {
+  color: #f38609;
+}
+
+.header .icons div {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 20px;
+  background: #f7f7f7;
+  color: #130f40;
+  border-radius: 0.5rem;
+  margin-left: 0.3rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.header .icons div:hover {
+  color: #fff;
+  background: #27ae60 !important;
+}
+
+.header .icons a.router-link-exact-active .cart {
+  background: #f38609;
+  color: white;
+}
+
+#menu-btn {
+  display: none;
+}
+
+.header .icons .account .drop-down-select {
+  display: none;
   position: absolute;
-  margin-left: 10px;
+  margin-left: -65px;
+  list-style-type: none;
+}
+
+.header .icons .account .drop-down-select a {
+  text-decoration: none;
+  color: #130f40;
+  font-size: 15px;
+  font-weight: 500;
+  float: left;
+  width: 95px;
+  border-radius: 5%;
+}
+
+.header .icons .account .drop-down-select.active {
+  display: block !important;
+}
+
+.header .icons .account .drop-down-select.active a {
+  background-color: #f7f7f7;
+}
+
+.header .icons .account .drop-down-select.active a:hover {
+  background-color: #f38609;
+  color: white;
+}
+
+/* .header .icons .account:hover .drop-down-select {
+    display: block;
+} */
+
+.header .icons .account:hover .drop-down-select a {
+  background-color: #f7f7f7;
+}
+
+.header .icons .account:hover .drop-down-select a:hover {
+  background-color: #f38609;
+  color: white;
+}
+
+@media (min-width: 769px) {
+  .header .icons .account:hover .drop-down-select {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .header .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .header .navbar a {
+    font-size: 2rem;
+    margin: 2rem;
+    display: block;
+  }
+
+  #menu-btn {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 576px) {
+  .header .navbar a {
+    font-size: 1.5rem;
+    margin: 0;
+  }
 }
 </style>
