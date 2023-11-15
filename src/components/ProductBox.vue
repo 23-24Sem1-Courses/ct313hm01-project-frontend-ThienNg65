@@ -7,10 +7,14 @@
         alt="Card image cap"
       />
     </div>
+
+    <a href="#" class="text-right px-3" @click="deleteItem(cartItem.productId)">Remove</a>
+
     <div class="card-body">
       <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
         <h5 class="card-title">{{ product.name }}</h5>
       </router-link>
+
       <p class="card-text">{{ product.description.substring(0, 65) }}...</p>
       <router-link
         :to="{ name: 'EditProduct', params: { id: product.id } }"

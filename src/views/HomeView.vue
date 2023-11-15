@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div id="background-div" class="page-holder bg-cover">
+    <!-- <div id="background-div" class="page-holder bg-cover">
       <div class="container py-5">
         <header class="text-left text-white py-5">
           <h3 class="mb-4 rounded" id="heading">
@@ -10,7 +10,7 @@
         </header>
       </div>
       <hr />
-    </div>
+    </div> -->
 
     <!--    display categories-->
     <div class="container">

@@ -19,7 +19,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!--      Search Bar-->
-      <form class="form-inline ml-auto mr-auto">
+      <!-- <form class="form-inline ml-auto mr-auto">
         <div class="input-group">
           <input
             size="100"
@@ -46,9 +46,17 @@
             </span>
           </div>
         </div>
-      </form>
+      </form> -->
+
       <!-- dropdown for browse -->
       <ul class="navbar-nav ml-auto">
+        <!-- SEARCH -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click="openSearchPopup">Search</a>
+        </li>
+        <SearchPopup ref="searchPopup"></SearchPopup>
+        <!-- END SEARCH -->
+
         <li class="nav-item dropdown">
           <a
             class="nav-link text-light dropdown-toggle"
@@ -100,10 +108,12 @@
   </nav>
 </template>
 <script>
+import SearchPopup from './SearchPopup.vue';
 import swal from 'sweetalert';
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Navbar',
+  components: { SearchPopup },
   props: ['cartCount'],
   data() {
     return {
@@ -111,6 +121,9 @@ export default {
     };
   },
   methods: {
+    openSearchPopup() {
+      this.$refs.searchPopup.open();
+    },
     signout() {
       localStorage.removeItem('token');
       this.token = null;
