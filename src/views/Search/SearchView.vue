@@ -1,3 +1,150 @@
 <template>
-  <h1>Search</h1>
+  <div class="product-view">
+    <div class="heading text-center pt-4">
+      <h3>Our Products</h3>
+    </div>
+
+    <div class="filters-wrapper flex gap-2 items-center">
+      <div class="form-control">
+        <label for="search" class="label">
+          <span class="label-text">Search</span>
+        </label>
+        <input id="search" type="text" v-model="filters.query" class="input input-bordered" />
+      </div>
+      <div class="form-control" w-full max-w-xs>
+        <label for="filterCategory" class="label">
+          <span class="label-text">Filter by Category</span>
+        </label>
+        <select id="filterCategory" class="select select-bordered" v-model="filters.category">
+          <option value="">All</option>
+          <option v-for="category in categories" :value="category.name" :key="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-control w-full max-w-xs">
+        <label for="orderBy" class="label">
+          <span class="label-text">Order by</span>
+        </label>
+
+        <select id="orderBy" class="select select-bordered" v-model="filters.order">
+          <option value="name">Name</option>
+          <option value="price">Price Asc</option>
+          <option value="-price">Price Dec</option>
+        </select>
+      </div>
+    </div>
+    <!-- Display filtered products -->
+    <div class="product-list">
+      <div v-for="product in filteredProducts" :key="product.id" class="product-item">
+        <img :src="product.imageUrl" :alt="product.name" class="product-image" />
+        <div class="product-info">
+          <h4>{{ product.name }}</h4>
+          <p>{{ product.description }}</p>
+          <p class="product-price">Price: ${{ product.price.toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script>
+import axios from 'axios';
+export default {
+  name: 'SearchView',
+
+  data() {
+    return {
+      products: [],
+      categories: [],
+      filters: { query: '', category: '', order: '' }
+    };
+  },
+
+  computed: {
+    filteredProducts() {
+      let filtered = this.products;
+
+      // Filter by category
+      if (this.filters.category) {
+        filtered = filtered.filter((product) => product.category.name === this.filters.category);
+      }
+
+      // Search by query
+      if (this.filters.query) {
+        const query = this.filters.query.toLowerCase();
+        filtered = filtered.filter((product) => product.name.toLowerCase().includes(query));
+      }
+
+      // Order by
+      if (this.filters.order) {
+        filtered = filtered.sort((a, b) => {
+          const key = this.filters.order.replace('-', '');
+          return a[key] > b[key] ? 1 : -1;
+        });
+      }
+
+      return filtered;
+    }
+  },
+
+  async created() {
+    try {
+      // Fetch products from the server
+      const productsResponse = await axios.get('/api/product');
+      this.products = productsResponse.data;
+
+      // Fetch categories from the server
+      const categoriesResponse = await axios.get('/api/category');
+      this.categories = categoriesResponse.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+};
+</script>
+
+<style scoped>
+.product-view {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filters-wrapper {
+  margin-top: 20px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #27ae60;
+}
+</style>

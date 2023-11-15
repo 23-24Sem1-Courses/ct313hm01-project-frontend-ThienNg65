@@ -30,8 +30,4 @@ a {
 .row {
   text-align: center;
 }
-
-li {
-  padding-bottom: 10px;
-}
 </style>

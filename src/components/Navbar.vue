@@ -59,13 +59,6 @@ export default {
       let navbar = document.querySelector('.header .navbar');
       navbar.classList.toggle('active');
     },
-    showLog: function () {
-      let mq = window.matchMedia('(max-width: 768px)');
-      if (mq.matches) {
-        let log = document.querySelector('.drop-down-select');
-        log.classList.toggle('active');
-      }
-    },
 
     signout() {
       localStorage.removeItem('token');
