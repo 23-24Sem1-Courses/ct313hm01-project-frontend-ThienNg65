@@ -51,10 +51,19 @@
       <!-- dropdown for browse -->
       <ul class="navbar-nav ml-auto">
         <!-- SEARCH -->
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="openSearchPopup">Search</a>
-        </li>
-        <SearchPopup ref="searchPopup"></SearchPopup>
+        <div class="container">
+          <i class="icon ion-navicon visible-xs"></i>
+          <span>Toggle Search</span>
+
+          <i id="toggle-search" class="icon ion-ios-search"></i>
+          <input
+            style="display: none"
+            id="searchBar"
+            name="search"
+            type="search"
+            placeholder="Search&hellip;"
+          />
+        </div>
         <!-- END SEARCH -->
 
         <li class="nav-item dropdown">
@@ -82,14 +91,16 @@
             Accounts
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarAccount">
-            <router-link v-if="token" class="dropdown-item" :to="{ name: 'WishList' }"
-              >Wishlist
-            </router-link>
             <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signup' }"
               >Sign up
             </router-link>
+
             <router-link v-if="!token" class="dropdown-item" :to="{ name: 'Signin' }"
               >Sign in
+            </router-link>
+
+            <router-link v-else class="dropdown-item" :to="{ name: 'WishList' }"
+              >Wishlist
             </router-link>
             <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign out </a>
           </div>
@@ -108,12 +119,12 @@
   </nav>
 </template>
 <script>
-import SearchPopup from './SearchPopup.vue';
+// import SearchPopup from './SearchPopup.vue';
 import swal from 'sweetalert';
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Navbar',
-  components: { SearchPopup },
+  // components: { SearchPopup },
   props: ['cartCount'],
   data() {
     return {

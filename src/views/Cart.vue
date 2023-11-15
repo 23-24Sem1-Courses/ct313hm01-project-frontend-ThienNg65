@@ -34,7 +34,15 @@
           </h6>
 
           <p class="mb-0 font-weight-bold" id="item-price">$ {{ cartItem.price }} per unit</p>
-          <p class="mb-0" style="float: left">Quantity:{{ cartItem.quantity }}</p>
+          <!-- <p class="mb-0" style="float: left">Quantity:{{ cartItem.quantity }}</p> -->
+
+          <!-- ADD QUANTITY IN CART -->
+          <div class="input-group col-md-3 col-4 p-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Quantity</span>
+            </div>
+            <input type="number" class="form-control" v-model="quantity" />
+          </div>
         </div>
         <p class="mb-0" style="float: right">
           Total:

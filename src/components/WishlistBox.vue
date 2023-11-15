@@ -8,6 +8,8 @@
       />
     </div>
 
+    <a href="#" class="text-right px-3" @click="deleteItem(cartItem.productId)">Remove</a>
+
     <div class="card-body">
       <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
         <h5 class="card-title">{{ product.name }}</h5>

@@ -14,16 +14,16 @@
         :key="product.id"
         class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
       >
-        <ProductBox :product="product"> </ProductBox>
+        <WishlistBox :product="product"> </WishlistBox>
       </div>
     </div>
   </div>
 </template>
 <script>
 import wishlistService from '../../services/wishlist.service';
-import ProductBox from '../../components/ProductBox.vue';
+import WishlistBox from '../../components/WishlistBox.vue';
 export default {
-  components: { ProductBox },
+  components: { WishlistBox },
   data() {
     return {
       token: null,
