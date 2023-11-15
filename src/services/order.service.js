@@ -4,7 +4,7 @@ export default {
   checkoutList(checkoutDetails, token) {
     return axios({
       method: 'post',
-      url: '/api/orders/create-checkout-session',
+      url: '/api/order/create-checkout-session',
       data: JSON.stringify(checkoutDetails),
       headers: {
         'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export default {
   placeOrder(orderId, token) {
     return axios({
       method: 'post',
-      url: `/api/orders/place-order/${orderId}`,
+      url: `/api/order/place-order/${orderId}`,
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ export default {
     });
   },
   getAllOrders(token) {
-    return axios.get('/api/orders', {
+    return axios.get('/api/order', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export default {
     });
   },
   getOrderById(orderId, token) {
-    return axios.get(`/api/orders/${orderId}`, {
+    return axios.get(`/api/order/${orderId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

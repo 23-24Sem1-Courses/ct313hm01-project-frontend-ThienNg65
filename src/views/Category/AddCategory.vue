@@ -29,9 +29,7 @@
   </div>
 </template>
 <script>
-// const axios = require('axios');
-import axios from 'axios';
-// const sweetalert = require('sweetalert');
+import categoryService from '../../services/category.service';
 import sweetalert from 'sweetalert';
 export default {
   data() {
@@ -42,22 +40,17 @@ export default {
     };
   },
   methods: {
-    addCategory() {
+    async addCategory() {
       console.log(this.categoryName, this.description);
       const newCategory = {
         categoryName: this.categoryName,
         description: this.description,
         imageUrl: this.imageUrl
       };
-
-      axios({
-        method: 'post',
-        url: `/api/category/create`,
-        data: JSON.stringify(newCategory),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      // token
+      const token = localStorage.getItem('token');
+      await categoryService
+        .createCategory(token, newCategory)
         .then(() => {
           sweetalert({
             text: 'Category added successfully',

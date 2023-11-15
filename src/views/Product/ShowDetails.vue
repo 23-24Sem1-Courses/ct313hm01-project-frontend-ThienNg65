@@ -45,7 +45,8 @@
 </template>
 <script>
 import swal from 'sweetalert';
-import axios from 'axios';
+import wishlistService from '../../services/wishlist.service';
+import cartService from '../../services/cart.service';
 export default {
   data() {
     return {
@@ -67,19 +68,13 @@ export default {
         });
         return;
       }
+      // params
+      const wishlistItem = {
+        productId: this.product.id
+      };
       // add item to wishlist
-      axios
-        .post(
-          `/api/wishlist/add`,
-          {
-            productId: this.product.id
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            }
-          }
-        )
+      wishlistService
+        .addWishList(wishlistItem, this.token)
         .then((res) => {
           if (res.status === 201) {
             this.wishListString = 'Added to Wishlist';
@@ -96,7 +91,7 @@ export default {
 
     // add to cart
 
-    addToCart() {
+    async addToCart() {
       if (!this.token) {
         // user is not logged in
         // show some error
@@ -108,20 +103,8 @@ export default {
       }
 
       // add to cart
-
-      axios
-        .post(
-          `/api/cart/add`,
-          {
-            productId: this.id,
-            quantity: this.quantity
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            }
-          }
-        )
+      await cartService
+        .addToCart(this.product, this.token)
         .then((res) => {
           if (res.status == 201) {
             swal({

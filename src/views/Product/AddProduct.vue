@@ -43,8 +43,8 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
 import swal from 'sweetalert';
+import productService from '../../services/product.service';
 export default {
   props: ['categories'],
   data() {
@@ -58,7 +58,8 @@ export default {
     };
   },
   methods: {
-    addProduct() {
+    async addProduct() {
+      // Create new product model
       const newProduct = {
         categoryId: this.categoryId,
         description: this.description,
@@ -66,9 +67,10 @@ export default {
         imageURL: this.imageURL,
         price: this.price
       };
-
-      axios
-        .post('/api/product/add', newProduct)
+      // get token from local cache
+      const token = localStorage.getItem('token');
+      await productService
+        .addProduct(newProduct, token)
         .then(() => {
           this.$router.push({ name: 'AdminProduct' });
           swal({

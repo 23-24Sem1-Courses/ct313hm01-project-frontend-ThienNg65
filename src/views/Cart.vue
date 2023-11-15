@@ -55,7 +55,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import cartService from '../services/cart.service';
 export default {
   data() {
     return {
@@ -67,13 +67,9 @@ export default {
   props: [],
   methods: {
     // fetch All items in cart
-    listCartItems() {
-      axios
-        .get(`/api/cart/`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          }
-        })
+    async listCartItems() {
+      await cartService
+        .getCartItems(this.token)
         .then((res) => {
           const result = res.data;
           this.cartItems = result.cartItems;
@@ -81,18 +77,12 @@ export default {
         })
         .catch((err) => console.log('err', err));
     },
-    deleteItem(itemId) {
-      console.log(itemId);
-      axios
-        .delete(
-          `/api/cart/`,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            }
-          },
-          { productId: itemId }
-        )
+    async deleteItem(itemId) {
+      const cartItemId = {
+        productId: itemId
+      };
+      await cartService
+        .removeCartItem(cartItemId, this.token)
         .then((res) => {
           if (res.status == 200) {
             this.$router.go(0);

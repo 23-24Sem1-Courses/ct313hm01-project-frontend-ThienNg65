@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import wishlistService from '../../services/wishlist.service';
 import ProductBox from '../../components/ProductBox.vue';
 export default {
   components: { ProductBox },
@@ -32,13 +32,9 @@ export default {
   },
   props: [],
   methods: {
-    fetchWishList() {
-      axios
-        .get(`/api/wishlist/all`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          }
-        })
+    async fetchWishList() {
+      await wishlistService
+        .getWishList(this.token)
         .then((data) => {
           this.products = data.data;
         })

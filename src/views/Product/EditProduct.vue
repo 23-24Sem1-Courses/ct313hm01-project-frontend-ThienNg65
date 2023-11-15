@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import categoryService from '../../services/category.service';
 import swal from 'sweetalert';
 export default {
   data() {
@@ -43,8 +43,8 @@ export default {
     async editCategory() {
       delete this.category['products'];
       console.log('category', this.category);
-      await axios
-        .post(`/api/category/update/${this.id}`, this.category)
+      await categoryService
+        .updateCategory(this.category.id, localStorage.getItem('token'), this.category)
         .then(() => {
           this.$emit('fetchData');
           this.$router.push({ name: 'Category' });

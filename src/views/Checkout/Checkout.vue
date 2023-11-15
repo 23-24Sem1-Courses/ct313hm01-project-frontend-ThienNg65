@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import cartService from '../../services/cart.service';
+import orderService from '../../services/order.service';
 export default {
   data() {
     return {
@@ -26,9 +27,10 @@ export default {
   name: 'Checkout',
   props: [],
   methods: {
-    getAllItems() {
-      axios
-        .get(`/api/cart/?token=${this.token}`)
+    async getAllItems() {
+      // Get all data from current cart
+      await cartService
+        .getCartItems(this.token)
         .then((response) => {
           if (response.status == 200) {
             let products = response.data;
@@ -44,10 +46,11 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    goToCheckout() {
+    async goToCheckout() {
       console.log('checkoutBodyArray', this.checkoutBodyArray);
-      axios
-        .post(`/api/order/create-checkout-session`, this.checkoutBodyArray)
+
+      await orderService
+        .checkoutList(this.checkoutBodyArray, this.token)
         .then((response) => {
           localStorage.setItem('sessionId', response.data.sessionId);
           console.log('session', response.data);
