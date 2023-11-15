@@ -102,9 +102,14 @@ export default {
         return;
       }
 
+      const cartItem = {
+        productId: this.product.id,
+        quantity: this.quantity
+      };
+
       // add to cart
       await cartService
-        .addToCart(this.product, this.token)
+        .addToCart(cartItem, this.token)
         .then((res) => {
           if (res.status == 201) {
             swal({

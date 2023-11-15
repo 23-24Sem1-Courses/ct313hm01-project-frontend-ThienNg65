@@ -85,12 +85,12 @@ export default {
         })
         .catch((err) => console.log('err', err));
     },
-    async deleteItem(itemId) {
-      const cartItemId = {
-        productId: itemId
+    async deleteItem(productId) {
+      const cartItem = {
+        productId: productId
       };
       await cartService
-        .removeCartItem(cartItemId, this.token)
+        .removeCartItem(cartItem, this.token)
         .then((res) => {
           if (res.status == 200) {
             this.$router.go(0);
