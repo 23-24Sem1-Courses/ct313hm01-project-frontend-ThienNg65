@@ -60,12 +60,6 @@
     </div>
 
     <!-- display total price -->
-    <!-- <div class="total-cost pt-2 text-right">
-      <h5>Total : ${{ totalCost.toFixed(2) }}</h5>
-      <button type="button" class="btn btn-primary confirm" @click="checkout">Confirm Order</button>
-    </div> -->
-
-    <!-- display total price -->
     <div class="total-cost pt-2 text-right">
       <h5>Total : $ {{ totalCost.toFixed(2) }}</h5>
       <button
@@ -105,6 +99,17 @@ export default {
           const result = res.data;
           this.cartItems = result.cartItems;
           this.totalCost = result.totalCost;
+        })
+        .catch((err) => console.log('err', err));
+    },
+
+    updateCartItem(cartItem) {
+      cartService
+        .removeCartItem(cartItem.id, cartItem, this.token)
+        .then((res) => {
+          if (res.status == 200) {
+            this.$router.go(0);
+          }
         })
         .catch((err) => console.log('err', err));
     },
