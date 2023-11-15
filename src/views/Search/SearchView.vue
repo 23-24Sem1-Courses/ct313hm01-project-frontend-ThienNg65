@@ -3,47 +3,48 @@
     <div class="heading text-center pt-4">
       <h3>Our Products</h3>
     </div>
+  </div>
 
-    <div class="filters-wrapper flex gap-2 items-center">
-      <div class="form-control">
-        <label for="search" class="label">
-          <span class="label-text">Search</span>
-        </label>
-        <input id="search" type="text" v-model="filters.query" class="input input-bordered" />
-      </div>
-      <div class="form-control" w-full max-w-xs>
-        <label for="filterCategory" class="label">
-          <span class="label-text">Filter by Category</span>
-        </label>
-        <select id="filterCategory" class="select select-bordered" v-model="filters.category">
-          <option value="">All</option>
-          <option v-for="category in categories" :value="category.name" :key="category.id">
-            {{ category.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="form-control w-full max-w-xs">
-        <label for="orderBy" class="label">
-          <span class="label-text">Order by</span>
-        </label>
-
-        <select id="orderBy" class="select select-bordered" v-model="filters.order">
-          <option value="name">Name</option>
-          <option value="price">Price Asc</option>
-          <option value="-price">Price Dec</option>
-        </select>
-      </div>
+  <div class="col-auto filters-wrapper flex gap-2 align-items-center d-flex flex-row">
+    <div class="form-control pt-3 pb-5 mr-3">
+      <label for="search" class="label">
+        <span class="label-text pr-2">Search</span>
+      </label>
+      <input id="search" type="text" v-model="filters.query" class="input input-bordered" />
     </div>
-    <!-- Display filtered products -->
-    <div class="product-list">
-      <div v-for="product in filteredProducts" :key="product.id" class="product-item">
-        <img :src="product.imageUrl" :alt="product.name" class="product-image" />
-        <div class="product-info">
-          <h4>{{ product.name }}</h4>
-          <p>{{ product.description }}</p>
-          <p class="product-price">Price: ${{ product.price.toFixed(2) }}</p>
-        </div>
+
+    <div class="form-control pt-3 pb-5 mr-3">
+      <label for="filterCategory" class="label">
+        <span class="label-text pr-2">Filter by Category</span>
+      </label>
+      <select id="filterCategory" class="select select-bordered" v-model="filters.category">
+        <option value="">All</option>
+        <option v-for="category in categories" :value="category.name" :key="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-control pt-3 pb-5 mr-3">
+      <label for="orderBy" class="label">
+        <span class="label-text pr-2">Order by</span>
+      </label>
+
+      <select id="orderBy" class="select select-bordered" v-model="filters.order">
+        <option value="name">Name</option>
+        <option value="price">Price Asc</option>
+        <option value="-price">Price Dec</option>
+      </select>
+    </div>
+  </div>
+  <!-- Display filtered products -->
+  <div class="product-list">
+    <div v-for="product in filteredProducts" :key="product.id" class="product-item">
+      <img :src="product.imageUrl" :alt="product.name" class="product-image" />
+      <div class="product-info">
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+        <p class="product-price">Price: ${{ product.price.toFixed(2) }}</p>
       </div>
     </div>
   </div>
