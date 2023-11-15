@@ -103,7 +103,7 @@ export default {
       console.log('Products:', this.products);
 
       // Fetch categories from the server
-      const categoriesResponse = await axios.get('/api/category');
+      const categoriesResponse = await axios.get('/api/category/all');
       this.categories = categoriesResponse.data;
       console.log('Categories:', this.categories);
 
