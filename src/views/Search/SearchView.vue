@@ -37,8 +37,10 @@
       </select>
     </div>
   </div>
+
+  <br />
   <!-- Display filtered products -->
-  <div class="product-list">
+  <div v-if="products.length > 0" class="product-list">
     <div v-for="product in filteredProducts" :key="product.id" class="product-item">
       <img :src="product.imageUrl" :alt="product.name" class="product-image" />
       <div class="product-info">
@@ -48,10 +50,12 @@
       </div>
     </div>
   </div>
+  <div v-else>Loading...</div>
 </template>
 
 <script>
 import axios from 'axios';
+
 export default {
   name: 'SearchView',
 
@@ -59,7 +63,8 @@ export default {
     return {
       products: [],
       categories: [],
-      filters: { query: '', category: '', order: '' }
+      filters: { query: '', category: '', order: '' },
+      loading: true // Added loading state
     };
   },
 
@@ -93,14 +98,21 @@ export default {
   async created() {
     try {
       // Fetch products from the server
-      const productsResponse = await axios.get('/api/product');
+      const productsResponse = await axios.get('api/product/all');
       this.products = productsResponse.data;
+      console.log('Products:', this.products);
 
       // Fetch categories from the server
       const categoriesResponse = await axios.get('/api/category');
       this.categories = categoriesResponse.data;
+      console.log('Categories:', this.categories);
+
+      // Data is loaded, set loading to false
+      this.loading = false;
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error.message);
+      // Set loading to false in case of an error
+      this.loading = false;
     }
   }
 };
