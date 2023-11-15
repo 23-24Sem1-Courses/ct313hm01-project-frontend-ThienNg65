@@ -51,19 +51,13 @@
       <!-- dropdown for browse -->
       <ul class="navbar-nav ml-auto">
         <!-- SEARCH -->
-        <div class="container">
-          <i class="icon ion-navicon visible-xs"></i>
-          <span>Toggle Search</span>
-
-          <i id="toggle-search" class="icon ion-ios-search"></i>
-          <input
-            style="display: none"
-            id="searchBar"
-            name="search"
-            type="search"
-            placeholder="Search&hellip;"
-          />
-        </div>
+        <li class="nav-item">
+          <button @click="toggleSearch">Search</button>
+          <form v-show="showSearch">
+            <input type="text" v-model="searchTerm" />
+            <button @click="submitSearch">Search</button>
+          </form>
+        </li>
         <!-- END SEARCH -->
 
         <li class="nav-item dropdown">
@@ -119,21 +113,24 @@
   </nav>
 </template>
 <script>
-// import SearchPopup from './SearchPopup.vue';
 import swal from 'sweetalert';
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Navbar',
-  // components: { SearchPopup },
   props: ['cartCount'],
   data() {
     return {
+      searchTerm: '',
+      showSearch: false,
       token: null
     };
   },
   methods: {
-    openSearchPopup() {
-      this.$refs.searchPopup.open();
+    toggleSearch() {
+      this.showSearch = !this.showSearch;
+    },
+    submitSearch() {
+      // Perform search action using the searchTerm
     },
     signout() {
       localStorage.removeItem('token');

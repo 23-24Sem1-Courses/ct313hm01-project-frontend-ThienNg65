@@ -37,28 +37,45 @@
           <!-- <p class="mb-0" style="float: left">Quantity:{{ cartItem.quantity }}</p> -->
 
           <!-- ADD QUANTITY IN CART -->
-          <div class="input-group col-md-3 col-4 p-0">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Quantity</span>
-            </div>
-            <input type="number" class="form-control" v-model="quantity" />
-          </div>
+          <p id="item-quantity" class="mb-0">
+            Quantity :
+            <input
+              size="1"
+              class="p-0 h-25 border-bottom border-top-0 border-left-0 border-right-0"
+              v-model="cartItem.quantity"
+            />
+          </p>
+          <p id="item-total-price" class="mb-0">
+            Total Price:
+            <span class="font-weight-bold"> $ {{ cartItem.price * cartItem.quantity }}</span>
+          </p>
+          <br />
+          <a href="#" class="text-right" @click="deleteItem(cartItem.productId)"
+            >Remove from cart
+          </a>
         </div>
-        <p class="mb-0" style="float: right">
-          Total:
-          <span class="font-weight-bold"> $ {{ cartItem.price * cartItem.quantity }} </span>
-        </p>
-        <br />
-        <a href="#" class="text-right" @click="deleteItem(cartItem.productId)">Remove from cart </a>
       </div>
       <div class="col-2"></div>
       <div class="col-12"><hr /></div>
     </div>
 
-    <!-- display the price -->
-    <div class="total-cost pt-2 text-right">
+    <!-- display total price -->
+    <!-- <div class="total-cost pt-2 text-right">
       <h5>Total : ${{ totalCost.toFixed(2) }}</h5>
       <button type="button" class="btn btn-primary confirm" @click="checkout">Confirm Order</button>
+    </div> -->
+
+    <!-- display total price -->
+    <div class="total-cost pt-2 text-right">
+      <h5>Total : $ {{ totalCost.toFixed(2) }}</h5>
+      <button
+        :disabled="isDisabled()"
+        type="button"
+        class="btn btn-primary confirm"
+        @click="checkout"
+      >
+        Confirm Order
+      </button>
     </div>
   </div>
 </template>
@@ -74,9 +91,15 @@ export default {
   },
   props: [],
   methods: {
+    isDisabled() {
+      if (this.cartItems.length === 0) {
+        return true;
+      }
+      return false;
+    },
     // fetch All items in cart
-    async listCartItems() {
-      await cartService
+    listCartItems() {
+      cartService
         .getCartItems(this.token)
         .then((res) => {
           const result = res.data;
@@ -85,11 +108,12 @@ export default {
         })
         .catch((err) => console.log('err', err));
     },
-    async deleteItem(productId) {
+
+    deleteItem(productId) {
       const cartItem = {
         productId: productId
       };
-      await cartService
+      cartService
         .removeCartItem(cartItem, this.token)
         .then((res) => {
           if (res.status == 200) {

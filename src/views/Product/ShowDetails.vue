@@ -91,7 +91,7 @@ export default {
 
     // add to cart
 
-    async addToCart() {
+    addToCart() {
       if (!this.token) {
         // user is not logged in
         // show some error
@@ -108,7 +108,7 @@ export default {
       };
 
       // add to cart
-      await cartService
+      cartService
         .addToCart(cartItem, this.token)
         .then((res) => {
           if (res.status == 201) {
