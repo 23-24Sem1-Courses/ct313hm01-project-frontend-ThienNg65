@@ -71,6 +71,7 @@ export default {
   //     this.loading = false;
   //   }
 
+  // FUNCTION RETRIEVE 3
   methods: {
     // list of order histories
     listOrders() {
