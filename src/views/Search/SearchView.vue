@@ -44,7 +44,10 @@
     <div v-for="product in filteredProducts" :key="product.id" class="product-item">
       <img :src="product.imageUrl" :alt="product.name" class="product-image" />
       <div class="product-info">
-        <h4>{{ product.name }}</h4>
+        <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
+          <h4>{{ product.name }}</h4>
+        </router-link>
+
         <p>{{ product.description }}</p>
         <p class="product-price">Price: ${{ product.price.toFixed(2) }}</p>
       </div>

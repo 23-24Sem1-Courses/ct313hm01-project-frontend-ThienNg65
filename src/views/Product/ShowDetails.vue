@@ -48,6 +48,7 @@ import swal from 'sweetalert';
 import wishlistService from '../../services/wishlist.service';
 import cartService from '../../services/cart.service';
 export default {
+  name: 'ShowDetails',
   data() {
     return {
       product: {},
