@@ -1,7 +1,7 @@
 
 import { createWebHistory, createRouter } from 'vue-router';
 import Home from '../views/HomeView.vue';
-import About from '../views/AboutView.vue';
+
 import AddCategory from '../views/Category/AddCategory.vue';
 import Category from '../views/Category/Category.vue';
 import EditCategory from "../views/Category/EditCategory.vue"
@@ -21,6 +21,8 @@ import Failed from '../views/payment/Failed.vue'
 
 import Checkout from '../views/Checkout/Checkout.vue'
 
+import SearchView from '../views/Search/SearchView.vue'
+
 const routes = [
   {
     path: '/',
@@ -28,9 +30,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/search',
+    name: 'SearchView',
+    component: SearchView
   },
 
   // category detail page

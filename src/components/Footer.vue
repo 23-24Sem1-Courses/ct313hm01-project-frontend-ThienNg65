@@ -1,40 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <footer>
-    <div class="container pt-5">
+    <div class="container pt-4">
       <div class="row">
-        <div class="col-md-3 col-6">
-          <ul style="list-style-type: none">
-            <li class="text-light font-weigh-bold pb-2">Get to know us</li>
-            <li><a class="footer-link font-weight-light" href="#"> About us </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Android App </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Ios App </a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-6">
-          <ul style="list-style-type: none">
-            <li class="text-light font-weigh-bold pb-2">Connect with us</li>
-            <li><a class="footer-link font-weight-light" href="#"> About us </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Android App </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Ios App </a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-6">
-          <ul style="list-style-type: none">
-            <li class="text-light font-weigh-bold pb-2">Make Money with us</li>
-            <li><a class="footer-link font-weight-light" href="#"> About us </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Android App </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Ios App </a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-6">
-          <ul style="list-style-type: none">
-            <li class="text-light font-weigh-bold pb-2">Let us help you</li>
-            <li><a class="footer-link font-weight-light" href="#"> About us </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Android App </a></li>
-            <li><a class="footer-link font-weight-light" href="#"> Ios App </a></li>
-          </ul>
-        </div>
+        <p class="text-light font-weigh-bold pb-2">Web Techonologies and Services Project 2023</p>
+      </div>
+      <div class="row">
+        <p class="text-light font-weigh-bold pb-2">
+          Made by <a href="#">Nguyen Vo Thuan Thien </a> and <a href="#">Nguyen Thanh Phat</a>
+        </p>
       </div>
     </div>
   </footer>
@@ -42,7 +16,7 @@
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
 footer {
   margin-top: 100px;
   background-color: #232f3e;
@@ -50,11 +24,10 @@ footer {
 }
 a {
   text-decoration: none;
+  color: burlywood;
 }
-.footer-link {
-  color: #ddd;
-}
-li {
-  padding-bottom: 10px;
+
+.row {
+  text-align: center;
 }
 </style>
