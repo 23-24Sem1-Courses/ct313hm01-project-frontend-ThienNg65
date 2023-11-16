@@ -23,6 +23,9 @@ import Checkout from '../views/Checkout/Checkout.vue'
 
 import SearchView from '../views/Search/SearchView.vue'
 
+import MyOrder from '../views/Orders/MyOrder.vue'
+import OrderDetails from '../views/Orders/OrderDetails.vue'
+
 const routes = [
   {
     path: '/',
@@ -134,6 +137,19 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout,
+  },
+
+
+  // ORDER
+  {
+    path: '/order',
+    name: 'MyOrder',
+    component: MyOrder,
+  },
+  {
+    path: '/order/:id',
+    name: 'OrderDetails',
+    component: OrderDetails,
   },
 
 ]
