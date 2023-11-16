@@ -12,13 +12,16 @@ export default {
       }
     });
   },
-  placeOrder(orderId, token) {
+  placeOrder(sessionId, token) {
     return axios({
       method: 'post',
-      url: `/api/order/place-order/${orderId}`,
+      url: `/api/order/place-order`,
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
+      },
+      data: {
+        sessionId: sessionId
       }
     });
   },
