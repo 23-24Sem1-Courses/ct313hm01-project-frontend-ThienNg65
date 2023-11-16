@@ -27,11 +27,11 @@
         </ul>
       </div>
 
-      <div v-if="token" class="fas fa-user account" style="background: #f38609; color: white">
+      <div v-else class="fas fa-user account" style="background: #f38609; color: white">
         <ul class="drop-down-select">
-          <!-- <li>
-            <router-link :to="{ OrderPage }">My Orders</router-link>
-          </li> -->
+          <li>
+            <router-link :to="{ name: 'MyOrder' }">My Orders</router-link>
+          </li>
           <li>
             <router-link @click="signout" to="/">Sign out</router-link>
           </li>
