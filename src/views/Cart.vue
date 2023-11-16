@@ -43,6 +43,8 @@
               size="1"
               class="p-0 h-25 border-bottom border-top-0 border-left-0 border-right-0"
               v-model="cartItem.quantity"
+              v-on:change="updateCartItem(cartItem)"
+              v-on:keypress="NumbersOnly"
             />
           </p>
           <p id="item-total-price" class="mb-0">
@@ -104,11 +106,16 @@ export default {
     },
 
     updateCartItem(cartItem) {
+      const updateCartItemDTO = {
+        cartId: cartItem.cartId,
+        productId: cartItem.productId,
+        quantity: cartItem.quantity
+      };
       cartService
-        .removeCartItem(cartItem.id, cartItem, this.token)
+        .updateCartItem(updateCartItemDTO, this.token)
         .then((res) => {
           if (res.status == 200) {
-            this.$router.go(0);
+            this.listCartItems();
           }
         })
         .catch((err) => console.log('err', err));

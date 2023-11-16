@@ -19,10 +19,10 @@ export default {
       }
     });
   },
-  updateCartItem(cartItemId, cartItem, token) {
+  updateCartItem(cartItem, token) {
     return axios({
       method: 'put',
-      url: `/api/cart/update/${cartItemId}`,
+      url: `/api/cart/update-quantity`,
       data: JSON.stringify(cartItem),
       headers: {
         Authorization: `Bearer ${token}`,
