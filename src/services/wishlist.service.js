@@ -21,7 +21,7 @@ export default {
   },
   removeWishlist(wishlistItem, token) {
     return axios({
-      method: 'post',
+      method: 'delete',
       url: '/api/wishlist/remove',
       data: JSON.stringify(wishlistItem),
       headers: {

@@ -14,12 +14,14 @@
         :key="product.id"
         class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
       >
-        <WishlistBox :product="product"> </WishlistBox>
+        <WishlistBox :product="product" @onDeleteWishlistItem="deleteWishlistItem(product)">
+        </WishlistBox>
       </div>
     </div>
   </div>
 </template>
 <script>
+import swal from 'sweetalert';
 import wishlistService from '../../services/wishlist.service';
 import WishlistBox from '../../components/WishlistBox.vue';
 export default {
@@ -37,6 +39,25 @@ export default {
         .getWishList(this.token)
         .then((data) => {
           this.products = data.data;
+        })
+        .catch((err) => {
+          console.log('err', err);
+        });
+    },
+    async deleteWishlistItem(product) {
+      const wishlistItem = {
+        productId: product.id
+      };
+      const token = localStorage.getItem('token');
+
+      await wishlistService
+        .removeWishlist(wishlistItem, token)
+        .then(() => {
+          this.fetchWishList();
+          swal({
+            text: 'Remove successfullly',
+            icon: 'success'
+          });
         })
         .catch((err) => {
           console.log('err', err);
