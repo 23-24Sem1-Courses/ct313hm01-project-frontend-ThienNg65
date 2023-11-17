@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <div class="col-auto filters-wrapper flex gap-2 align-items-center d-flex flex-row">
+  <div class="col-auto filters-wrapper flex gap-2 align-items-center d-flex flex-row mr-4 ml-5">
     <div class="form-control pt-3 pb-5 mr-3">
       <label for="search" class="label">
         <span class="label-text pr-2">Search</span>
@@ -40,8 +40,8 @@
 
   <br />
   <!-- Display filtered products -->
-  <div v-if="products.length > 0" class="product-list">
-    <div v-for="product in filteredProducts" :key="product.id" class="product-item">
+  <div v-if="products.length > 0" class="product-list mr-5 ml-5 align-items-center">
+    <div v-for="product in filteredProducts" :key="product.id" class="product-item pr-5">
       <img :src="product.imageUrl" :alt="product.name" class="product-image" />
       <div class="product-info">
         <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
@@ -139,6 +139,8 @@ export default {
 }
 
 .product-item {
+  height: 20rem;
+
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
