@@ -18,13 +18,14 @@ export default {
       }
     });
   },
-  updateProduct(id, updatedProduct) {
+  updateProduct(id, updatedProduct, token) {
     return axios({
       method: 'put',
       url: `/api/product/${id}`,
       data: JSON.stringify(updatedProduct),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     });
   },

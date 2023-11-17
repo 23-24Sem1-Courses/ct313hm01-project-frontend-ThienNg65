@@ -43,19 +43,29 @@
 </template>
 
 <script>
-import axios from 'axios';
 import swal from 'sweetalert';
+import productService from '../../services/product.service';
 export default {
   data() {
     return {
-      product: null
+      product: null,
+      token: null
     };
   },
   props: ['baseURL', 'products', 'categories'],
   methods: {
     async editProduct() {
-      axios
-        .post(this.baseURL + 'product/update/' + this.id, this.product)
+      const productId = Number(this.$route.params.id);
+      const updateProduct = {
+        id: this.product.id,
+        name: this.product.name,
+        imageUrl: this.product.imageUrl,
+        price: this.product.price,
+        description: this.product.description,
+        categoryId: this.product.categoryId
+      };
+      await productService
+        .updateProduct(productId, updateProduct, this.token)
         .then((res) => {
           //sending the event to parent to handle
           this.$emit('fetchData');
@@ -75,6 +85,7 @@ export default {
       this.$router.push({ name: 'Signin' });
       return;
     }
+    this.token = localStorage.getItem('token');
     this.id = this.$route.params.id;
     this.product = this.products.find((product) => product.id == this.id);
   }
