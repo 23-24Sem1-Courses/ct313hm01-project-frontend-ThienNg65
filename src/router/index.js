@@ -6,7 +6,7 @@ import AddCategory from '../views/Category/AddCategory.vue';
 import Category from '../views/Category/Category.vue';
 import EditCategory from "../views/Category/EditCategory.vue"
 import Product from '../views/Product/Product.vue';
-import Admin from "../views/Admin.vue";
+import Admin from '../views/Admin/Admin.vue'
 import AddProduct from "../views/Product/AddProduct.vue";
 import EditProduct from "../views/Product/EditProduct.vue";
 import ShowDetails from "../views/Product/ShowDetails.vue";
@@ -22,6 +22,9 @@ import Failed from '../views/payment/Failed.vue'
 import Checkout from '../views/Checkout/Checkout.vue'
 
 import SearchView from '../views/Search/SearchView.vue'
+
+import MyOrder from '../views/Orders/MyOrder.vue'
+import OrderDetails from '../views/Orders/OrderDetails.vue'
 
 const routes = [
   {
@@ -134,6 +137,19 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout,
+  },
+
+
+  // ORDER
+  {
+    path: '/order',
+    name: 'MyOrder',
+    component: MyOrder,
+  },
+  {
+    path: '/order/:id',
+    name: 'OrderDetails',
+    component: OrderDetails,
   },
 
 ]
