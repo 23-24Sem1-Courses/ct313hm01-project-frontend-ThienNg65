@@ -26,90 +26,53 @@
 </template>
 
 <script>
-import { myOrdersData } from './TestItemData.js';
+import orderService from '../../services/order.service';
 // import axios from 'axios';
 export default {
   name: 'MyOrder',
   // props: ['baseURL'],
   data() {
     return {
-      orders: myOrdersData,
+      orders: [],
       // orderList: [],
       token: null
       // loading: true
     };
   },
 
-  // FUNCTION RETRIVE 1
-  mounted() {
-    // Fetch orders data from your API endpoint
-    this.fetchOrders();
-  },
-  methods: {
-    fetchOrders() {
-      // Replace this with your actual API endpoint to fetch orders data
-      // For simplicity, I'm using a fake API endpoint here
-      // fetch('api/order')
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     this.orders = data;
-      //   })
-      //   .catch((error) => {
-      //     console.error('Error fetching orders:', error);
-      //   });
-      this.orders = myOrdersData;
-    }
-  }
-
-  // FUNCTION RETRIVE 2
-  // async created() {
-  //   try {
-  //     // Fetch products from the server
-  //     const orderResponse = await axios.get('api/order/');
-  //     this.orders = orderResponse.data;
-  //     console.log('Orders:', this.orders);
-
-  //     // Data is loaded, set loading to false
-  //     this.loading = false;
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error.message);
-  //     // Set loading to false in case of an error
-  //     this.loading = false;
-  //   }
-
   // FUNCTION RETRIEVE 3
-  // methods: {
-  //   // list of order histories
-  //   listOrders() {
-  //     axios.get(`api/order/?token=${this.token}`).then(
-  //       (response) => {
-  //         if (response.status == 200) {
-  //           this.orders = response.data;
-  //           // for each order populate orderList
-  //           this.orders.forEach((order) => {
-  //             this.orderList.push({
-  //               id: order.id,
-  //               totalCost: order.totalPrice,
-  //               // get short date
-  //               orderdate: order.createdDate.substring(0, 10),
-  //               // get image of the first orderItem of the order
-  //               imageURL: order.orderItems[0].product.imageURL,
-  //               // get total items
-  //               totalItems: order.orderItems.length
-  //             });
-  //           });
-  //         }
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }
-  // },
-  // mounted() {
-  //   this.token = localStorage.getItem('token');
-  //   this.listOrders();
-  // }
+  methods: {
+    // list of order histories
+    async listOrders() {
+      await orderService.getAllOrders(this.token).then(
+        (response) => {
+          if (response.status == 200) {
+            this.orders = response.data;
+            // for each order populate orderList
+            this.orders.forEach((order) => {
+              this.orderList.push({
+                id: order.id,
+                totalCost: order.totalPrice,
+                // get short date
+                orderdate: order.createdDate.substring(0, 10),
+                // get image of the first orderItem of the order
+                imageURL: order.orderItems[0].product.imageUrl,
+                // get total items
+                totalItems: order.orderItems.length
+              });
+            });
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  },
+  mounted() {
+    this.token = localStorage.getItem('token');
+    this.listOrders();
+  }
   // }
 };
 </script>
