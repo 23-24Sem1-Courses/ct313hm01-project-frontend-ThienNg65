@@ -6,7 +6,7 @@ import AddCategory from '../views/Category/AddCategory.vue';
 import Category from '../views/Category/Category.vue';
 import EditCategory from "../views/Category/EditCategory.vue"
 import Product from '../views/Product/Product.vue';
-import Admin from "../views/Admin.vue";
+import Admin from '../views/Admin/Admin.vue'
 import AddProduct from "../views/Product/AddProduct.vue";
 import EditProduct from "../views/Product/EditProduct.vue";
 import ShowDetails from "../views/Product/ShowDetails.vue";
