@@ -7,8 +7,14 @@
         <!-- <div class="item-details"> -->
         <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image col-lg" />
 
-        <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
-        <p class="col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
+        <router-link
+          class="text-dark"
+          :to="{ name: 'ShowDetails', params: { id: orderItem.product.id } }"
+        >
+          <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
+        </router-link>
+
+        <p class="ml-5 col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
         <p class="col-sm d-flex">Price: ${{ orderItem.price }}</p>
         <!-- </div> -->
       </div>

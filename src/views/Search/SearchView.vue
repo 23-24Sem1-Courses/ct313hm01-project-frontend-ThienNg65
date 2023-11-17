@@ -144,7 +144,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s;
 }
 
 .product-item:hover {
