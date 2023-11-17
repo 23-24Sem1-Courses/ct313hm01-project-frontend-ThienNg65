@@ -2,63 +2,89 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h4 class="pt-3">Edit Category</h4>
+        <h4 class="pt-3">Edit Product</h4>
       </div>
     </div>
+
     <div class="row">
       <div class="col-3"></div>
-      <div class="col-6">
-        <form v-if="category">
+      <div class="col-md-6 px-5 px-md-0">
+        <form v-if="product">
           <div class="form-group">
-            <label>Category Name</label>
-            <input type="text" class="form-control" v-model="category.categoryName" required />
+            <label>Category</label>
+            <select class="form-control" v-model="product.categoryId" required>
+              <option v-for="category of categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" v-model="product.name" required />
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" class="form-control" v-model="category.description" required />
+            <input type="text" class="form-control" v-model="product.description" required />
           </div>
           <div class="form-group">
-            <label>Image URL</label>
-            <input type="text" class="form-control" v-model="category.imageUrl" required />
+            <label>ImageURL</label>
+            <input type="url" class="form-control" v-model="product.imageURL" required />
           </div>
-          <button type="button" class="btn btn-primary" @click="editCategory">Submit</button>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" v-model="product.price" required />
+          </div>
+          <button type="button" class="btn btn-primary" @click="editProduct">Submit</button>
         </form>
       </div>
       <div class="col-3"></div>
     </div>
   </div>
 </template>
+
 <script>
-import categoryService from '../../services/category.service';
+import axios from 'axios';
 import swal from 'sweetalert';
 export default {
   data() {
     return {
-      category: null,
-      id: null
+      product: null
     };
   },
-  props: ['categories'],
+  props: ['baseURL', 'products', 'categories'],
   methods: {
-    async editCategory() {
-      delete this.category['products'];
-      console.log('category', this.category);
-      await categoryService
-        .updateCategory(this.category.id, localStorage.getItem('token'), this.category)
-        .then(() => {
+    async editProduct() {
+      axios
+        .post(this.baseURL + 'product/update/' + this.id, this.product)
+        .then((res) => {
+          //sending the event to parent to handle
           this.$emit('fetchData');
-          this.$router.push({ name: 'Category' });
+          this.$router.push({ name: 'AdminProduct' });
           swal({
-            text: 'category has been updated successfully',
-            icon: 'success'
+            text: 'Product Updated Successfully!',
+            icon: 'success',
+            closeOnClickOutside: false
           });
+          return res;
         })
         .catch((err) => console.log('err', err));
     }
   },
   mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({ name: 'Signin' });
+      return;
+    }
     this.id = this.$route.params.id;
-    this.category = this.categories.find((category) => category.id == this.id);
+    this.product = this.products.find((product) => product.id == this.id);
   }
 };
 </script>
+
+<style scoped>
+h4 {
+  font-family: 'Roboto', sans-serif;
+  color: #484848;
+  font-weight: 700;
+}
+</style>
