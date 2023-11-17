@@ -1,6 +1,6 @@
 <template>
   <div class="product-view">
-    <div class="heading text-center pt-4">
+    <div class="heading text-center my-3">
       <h3>Our Products</h3>
     </div>
   </div>
