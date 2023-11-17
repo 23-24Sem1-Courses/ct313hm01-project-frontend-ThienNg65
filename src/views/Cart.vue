@@ -17,7 +17,7 @@
       <div class="col-2"></div>
       <div class="col-md-3 embed-responsive embed-responsive-16by9">
         <img
-          :src="cartItem.imageURL"
+          :src="cartItem.imageUrl"
           alt=""
           class="w-100 card-image-top embed-responsive-item"
           style="object-fit: cover"

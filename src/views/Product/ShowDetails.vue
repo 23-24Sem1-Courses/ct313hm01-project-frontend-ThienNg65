@@ -4,7 +4,7 @@
       <div class="col-md-1"></div>
       <!--            display image-->
       <div class="col-md-4 col-12">
-        <img :src="product.imageURL" class="img-fluid" />
+        <img :src="product.imageUrl" class="img-fluid" />
       </div>
       <!--            display product details-->
       <div class="col-md-6 col-12 pt-3 pt-md-0">
