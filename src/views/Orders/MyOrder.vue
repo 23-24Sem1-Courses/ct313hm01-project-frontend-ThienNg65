@@ -56,7 +56,7 @@ export default {
                 // get short date
                 orderdate: order.createdDate.substring(0, 10),
                 // get image of the first orderItem of the order
-                imageURL: order.orderItems[0].product.imageUrl,
+                imageUrl: order.orderItems[0].product.imageUrl,
                 // get total items
                 totalItems: order.orderItems.length
               });

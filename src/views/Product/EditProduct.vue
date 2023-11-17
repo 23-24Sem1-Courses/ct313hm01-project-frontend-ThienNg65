@@ -27,8 +27,8 @@
             <input type="text" class="form-control" v-model="product.description" required />
           </div>
           <div class="form-group">
-            <label>ImageURL</label>
-            <input type="url" class="form-control" v-model="product.imageURL" required />
+            <label>imageUrl</label>
+            <input type="url" class="form-control" v-model="product.imageUrl" required />
           </div>
           <div class="form-group">
             <label>Price</label>

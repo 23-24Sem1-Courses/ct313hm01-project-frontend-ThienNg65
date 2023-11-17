@@ -27,7 +27,7 @@
           </div>
           <div class="form-group">
             <label>Image Url</label>
-            <input type="text" v-model="imageURL" class="form-control" />
+            <input type="text" v-model="imageUrl" class="form-control" />
           </div>
           <div class="form-group">
             <label>Price</label>
@@ -53,7 +53,7 @@ export default {
       categoryId: null,
       name: null,
       description: null,
-      imageURL: null,
+      imageUrl: null,
       price: null
     };
   },
@@ -64,7 +64,7 @@ export default {
         categoryId: this.categoryId,
         description: this.description,
         name: this.name,
-        imageURL: this.imageURL,
+        imageUrl: this.imageUrl,
         price: this.price
       };
       // get token from local cache
