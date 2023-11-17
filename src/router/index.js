@@ -26,6 +26,8 @@ import SearchView from '../views/Search/SearchView.vue'
 import MyOrder from '../views/Orders/MyOrder.vue'
 import OrderDetails from '../views/Orders/OrderDetails.vue'
 
+import OrderBox from '../components/OrderBox.vue'
+
 const routes = [
   {
     path: '/',
@@ -93,6 +95,13 @@ const routes = [
     path: '/admin/product/detail/:id',
     name: 'ShowDetails',
     component: ShowDetails
+  },
+
+  // Order admin
+  {
+    path: '/admin/order/all',
+    name: 'OrderBox',
+    component: OrderBox
   },
 
 

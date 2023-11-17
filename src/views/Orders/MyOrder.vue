@@ -8,14 +8,14 @@
         <!-- </router-link> -->
         <p class="order-info">Created Date: {{ order.createdDate }}</p>
         <p class="order-info">Total Price: ${{ order.totalPrice }}</p>
-        <ul class="order-items">
+        <!-- <ul class="order-items">
           orders
           <li v-for="item in order.items" :key="item.id">
             {{ item.quantity }} x {{ item.product.name }} - ${{ item.price }}
           </li>
-        </ul>
+        </ul> -->
         <h6 class="card-title">
-          <router-link v-bind:to="'/order/' + order.id">Order No : {{ order.id }}</router-link>
+          <router-link v-bind:to="'/order/' + order.id">View Details</router-link>
         </h6>
       </div>
     </div>
