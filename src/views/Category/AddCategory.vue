@@ -43,7 +43,7 @@ export default {
     async addCategory() {
       console.log(this.categoryName, this.description);
       const newCategory = {
-        categoryName: this.categoryName,
+        name: this.categoryName,
         description: this.description,
         imageUrl: this.imageUrl
       };

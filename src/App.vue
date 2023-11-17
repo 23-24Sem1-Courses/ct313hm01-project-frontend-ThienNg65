@@ -56,7 +56,9 @@ export default {
             const result = res.data;
             this.cartCount = result.cartItems.length;
           })
-          .catch((err) => console.log('err', err));
+          .catch(() => {
+            this.cartCount = 0;
+          });
       }
     },
     resetCartCount() {
