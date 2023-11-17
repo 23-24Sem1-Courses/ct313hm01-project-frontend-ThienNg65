@@ -25,8 +25,16 @@ export default {
       }
     });
   },
-  getAllOrders(token) {
+  getAllUserOrders(token) {
     return axios.get('/api/order', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  },
+  getAllOrders(token) {
+    return axios.get('/api/order/all', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

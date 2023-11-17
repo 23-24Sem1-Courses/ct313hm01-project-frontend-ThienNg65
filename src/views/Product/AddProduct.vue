@@ -13,7 +13,7 @@
             <label>Category</label>
             <select class="form-control" v-model="categoryId" required>
               <option v-for="category in categories" :key="category.id" :value="category.id">
-                {{ category.categoryName }}
+                {{ category.name }}
               </option>
             </select>
           </div>
