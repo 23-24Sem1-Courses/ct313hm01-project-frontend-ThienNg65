@@ -1,22 +1,21 @@
 <template>
-  <div class="order-details">
-    <h1>Order Details</h1>
-    <div v-if="orderItems">
-      <!-- <h2>Order Item #{{ orderItem.id }}</h2> -->
-      <div
-        v-for="orderItem of orderItems"
-        :key="orderItem.id"
-        class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
-      >
-        <img :src="orderItem.product.imageUrl" class="w-100 card-img-top embed-responsive-item" />
-        <hr />
-        <h6 class="card-title text-center">{{ orderItem.product.name }}</h6>
-        <p class="order-info">Quantity: {{ orderItem.quantity }}</p>
-        <p class="order-info">Price: ${{ orderItem.price }}</p>
+  <div class="order-details-container">
+    <h3 class="text-center my-3">Order Details</h3>
+
+    <div v-if="orderItems.length > 0" class="order-items-container d-flex justify-content-center">
+      <div v-for="orderItem in orderItems" :key="orderItem.id" class="order-item">
+        <!-- <div class="item-details"> -->
+        <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image col-lg" />
+
+        <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
+        <p class="col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
+        <p class="col-sm d-flex">Price: ${{ orderItem.price }}</p>
+        <!-- </div> -->
       </div>
     </div>
+
     <div v-else>
-      <p>No order item available.</p>
+      <p>No order items available.</p>
     </div>
   </div>
 </template>
@@ -59,18 +58,38 @@ export default {
 </script>
 
 <style scoped>
-.order-details {
-  max-width: 800px;
+.order-details-container {
   margin: 0 auto;
   padding: 20px;
 }
 
-.order-info {
-  margin: 5px 0;
+.order-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.order-details p {
-  text-align: center;
-  color: #888;
+.order-item {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  width: 1000px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+.order-item:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.item-details {
+  flex-grow: 1;
 }
 </style>

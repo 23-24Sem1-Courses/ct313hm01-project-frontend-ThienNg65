@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h4 class="pt-3">Your WishList</h4>
+        <h3 class="mt-4">Your WishList</h3>
       </div>
     </div>
 
