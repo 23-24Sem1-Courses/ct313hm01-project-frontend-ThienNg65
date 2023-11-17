@@ -76,6 +76,9 @@
   </div>
 </template>
 <script>
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+const $toast = useToast();
 import cartService from '../services/cart.service';
 export default {
   data() {
@@ -117,6 +120,10 @@ export default {
           if (res.status == 200) {
             this.listCartItems();
           }
+          $toast.success('Update success', {
+            // override the global option
+            position: 'top-right'
+          });
         })
         .catch((err) => console.log('err', err));
     },
@@ -131,6 +138,10 @@ export default {
           if (res.status == 200) {
             this.$router.go(0);
           }
+          $toast.success('Product removed!', {
+            // override the global option
+            position: 'top-right'
+          });
         })
         .catch((err) => console.log('err', err));
     },

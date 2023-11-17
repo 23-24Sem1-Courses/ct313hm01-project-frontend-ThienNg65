@@ -21,9 +21,14 @@
   </div>
 </template>
 <script>
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+const $toast = useToast();
+
 import wishlistService from '../../services/wishlist.service';
 import WishlistBox from '../../components/WishlistBox.vue';
+
 export default {
   components: { WishlistBox },
   data() {
@@ -54,13 +59,17 @@ export default {
         .removeWishlist(wishlistItem, token)
         .then(() => {
           this.fetchWishList();
-          swal({
-            text: 'Remove successfullly',
-            icon: 'success'
+          $toast.success('Removed Successfully', {
+            // override the global option
+            position: 'top-right'
           });
         })
         .catch((err) => {
           console.log('err', err);
+          $toast.error('Something wrong, try again!', {
+            // override the global option
+            position: 'top-right'
+          });
         });
     }
   },

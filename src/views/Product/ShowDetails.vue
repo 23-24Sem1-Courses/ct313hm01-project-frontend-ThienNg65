@@ -44,7 +44,10 @@
   </div>
 </template>
 <script>
-import swal from 'sweetalert';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+const $toast = useToast();
+
 import wishlistService from '../../services/wishlist.service';
 import cartService from '../../services/cart.service';
 export default {
@@ -53,19 +56,22 @@ export default {
     return {
       product: {},
       category: {},
+      id: null,
+      token: null,
+      isAddedToWishlist: false,
       quantity: 1,
       wishListString: 'Add to wishlist'
     };
   },
   props: ['products', 'categories'],
   methods: {
-    addToWishlist() {
+    async addToWishlist() {
       if (!this.token) {
         // user is not logged in
         // show some error
-        swal({
-          text: 'please login to add item in wishlist',
-          icon: 'error'
+        $toast.error('Please login to proceed!', {
+          // override the global option
+          position: 'top-right'
         });
         return;
       }
@@ -74,16 +80,20 @@ export default {
         productId: this.product.id
       };
       // add item to wishlist
-      wishlistService
+      await wishlistService
         .addWishList(wishlistItem, this.token)
-        .then((res) => {
-          if (res.status === 201) {
-            this.wishListString = 'Added to Wishlist';
-            swal({
-              text: 'Added to Wishlist',
-              icon: 'success'
-            });
-          }
+        .then(() => {
+          // if (res.status === 201) {
+          //   this.wishListString = 'Added to Wishlist';
+          //   $toast.success('Product added to your wishlist', {
+          //     // override the global option
+          //     position: 'top-right'
+          //   });
+          // }
+          $toast.success('Product added to your wishlist', {
+            // override the global option
+            position: 'top-right'
+          });
         })
         .catch((err) => {
           console.log('err', err);
@@ -96,9 +106,9 @@ export default {
       if (!this.token) {
         // user is not logged in
         // show some error
-        swal({
-          text: 'please login to add item in cart',
-          icon: 'error'
+        $toast.error('Please login to proceed', {
+          // override the global option
+          position: 'top-right'
         });
         return;
       }
@@ -111,14 +121,19 @@ export default {
       // add to cart
       cartService
         .addToCart(cartItem, this.token)
-        .then((res) => {
-          if (res.status == 201) {
-            swal({
-              text: 'Product added in cart',
-              icon: 'success'
-            });
-            this.$emit('fetchData');
-          }
+        .then(() => {
+          // if (res.status == 201) {
+          //   $toast.success('Product added to your cart', {
+          //     // override the global option
+          //     position: 'top-right'
+          //   });
+          //   this.$emit('fetchData');
+          // }
+          $toast.success('Product added to your cart', {
+            // override the global option
+            position: 'top-right'
+          });
+          this.$emit('fetchData');
         })
         .catch((err) => console.log('err', err));
     }
