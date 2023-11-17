@@ -72,7 +72,7 @@ export default {
       await productService
         .addProduct(newProduct, token)
         .then(() => {
-          this.$router.push({ name: 'AdminProduct' });
+          this.$router.push({ name: 'Product' });
           swal({
             text: 'Product added',
             icon: 'success'
