@@ -30,6 +30,7 @@
 
       <div v-else class="fas fa-user account" style="background: #f38609; color: white">
         <ul class="drop-down-select">
+          <!-- validate admin -->
           <li>
             <router-link :to="{ name: 'Admin' }">Admin</router-link>
           </li>
