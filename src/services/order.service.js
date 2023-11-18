@@ -26,7 +26,7 @@ export default {
     });
   },
   getAllUserOrders(token) {
-    return axios.get('/api/order', {
+    return axios.get('/api/order/all', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -34,7 +34,15 @@ export default {
     });
   },
   getAllOrders(token) {
-    return axios.get('/api/order/all', {
+    return axios.get('/api/order/admin/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  },
+  getUserOrderById(orderId, token) {
+    return axios.get(`/api/order/${orderId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -47,6 +55,18 @@ export default {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
+    });
+  },
+  updateOrderStatus(updateOrder, token) {
+    return axios({
+      method: 'put',
+      maxBodyLength: Infinity,
+      url: '/api/order/admin/update',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data: updateOrder
     });
   }
 };

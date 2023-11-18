@@ -44,7 +44,7 @@ export default {
   methods: {
     // list of order histories
     async listOrders() {
-      await orderService.getAllOrders(this.token).then(
+      await orderService.getAllUserOrders(this.token).then(
         (response) => {
           if (response.status == 200) {
             this.orders = response.data;
