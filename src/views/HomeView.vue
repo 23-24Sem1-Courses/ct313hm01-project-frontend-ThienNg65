@@ -4,7 +4,7 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-12 text-center">
-          <h3 class="display-5">Top Categories</h3>
+          <h3 class="display-5">Feature Categories</h3>
         </div>
       </div>
       <div class="row">
@@ -18,7 +18,7 @@
     <div class="container my-5">
       <div class="row">
         <div class="col-12 text-center">
-          <h3 class="display-5">Top Products</h3>
+          <h3 class="display-5">Feature Products</h3>
         </div>
       </div>
 

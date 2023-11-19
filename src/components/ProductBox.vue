@@ -31,7 +31,7 @@ export default {
 </script>
 <style scoped>
 .card-img-top {
-  object-fit: cover;
+  object-fit: contain;
 }
 a {
   text-decoration: none;

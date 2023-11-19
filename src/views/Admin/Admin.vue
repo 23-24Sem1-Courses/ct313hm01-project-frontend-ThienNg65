@@ -23,15 +23,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .adminPanel {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .adminPanel button {
   font-size: 30px;
   width: fit-content;
-  margin: 55px 0;
 }
 </style>

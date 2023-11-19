@@ -139,8 +139,7 @@ export default {
 }
 
 .product-item {
-  height: 20rem;
-
+  height: 24rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -153,8 +152,8 @@ export default {
 
 .product-image {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  height: 180px;
+  object-fit: contain;
 }
 
 .product-info {

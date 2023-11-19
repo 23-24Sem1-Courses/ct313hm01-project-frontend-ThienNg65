@@ -37,8 +37,19 @@ export default {
 };
 </script>
 <style scoped>
+.card {
+  height: 24rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
 .card-img-top {
-  object-fit: cover;
+  object-fit: contain;
 }
 a {
   text-decoration: none;

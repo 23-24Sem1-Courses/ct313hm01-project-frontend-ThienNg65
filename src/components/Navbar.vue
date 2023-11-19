@@ -1,7 +1,7 @@
 <template>
   <div class="header navbar-dark bg-dark w-auto h-50">
     <router-link class="navbar-brand" :to="{ name: 'Home' }">
-      <h3>E-Commerce</h3>
+      <h3>Apple Reseller</h3>
     </router-link>
 
     <nav class="navbar">

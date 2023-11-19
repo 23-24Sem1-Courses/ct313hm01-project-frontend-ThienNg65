@@ -15,9 +15,13 @@
       class="row mt-2 pt-3 justify-content-around"
     >
       <div class="col-2"></div>
-      <div class="col-md-3 embed-responsive embed-responsive-16by9">
+      <div
+        v-for="product in products"
+        :key="product.id"
+        class="col-md-3 embed-responsive embed-responsive-16by9"
+      >
         <img
-          :src="cartItem.imageUrl"
+          :src="product.imageUrl"
           alt=""
           class="w-100 card-image-top embed-responsive-item"
           style="object-fit: cover"
@@ -80,15 +84,17 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 const $toast = useToast();
 import cartService from '../services/cart.service';
+import productService from '../services/product.service';
 export default {
   data() {
     return {
       cartItems: [],
       token: null,
-      totalCost: 0
+      totalCost: 0,
+      products: []
     };
   },
-  props: [],
+  props: ['product'],
   methods: {
     isDisabled() {
       if (this.cartItems.length === 0) {
@@ -102,8 +108,22 @@ export default {
         .getCartItems(this.token)
         .then((res) => {
           const result = res.data;
+
           this.cartItems = result.cartItems;
           this.totalCost = result.totalCost;
+
+          // Fetch product details for each item in the cart
+          this.cartItems.forEach((cartItem) => {
+            productService
+              .getProductById(cartItem.productId)
+              .then((productDetailsRes) => {
+                const productDetails = productDetailsRes.data;
+                // Assuming productDetails.products is an array of products
+                // You may need to adjust this based on your API response
+                this.products = productDetails.products;
+              })
+              .catch((err) => console.log('Error fetching product details', err));
+          });
         })
         .catch((err) => console.log('err', err));
     },

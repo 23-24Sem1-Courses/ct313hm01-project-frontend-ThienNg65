@@ -33,6 +33,6 @@ export default {
 
 <style scoped>
 .card-img-top {
-  object-fit: cover;
+  object-fit: contain;
 }
 </style>
