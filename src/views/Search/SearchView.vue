@@ -136,6 +136,7 @@ export default {
 
 .filters-wrapper {
   margin-top: 20px;
+  width: fit-content;
 }
 
 .product-list {
