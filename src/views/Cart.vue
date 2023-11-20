@@ -80,7 +80,6 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 const $toast = useToast();
 import cartService from '../services/cart.service';
-import productService from '../services/product.service';
 export default {
   data() {
     return {
@@ -107,19 +106,6 @@ export default {
 
           this.cartItems = result.cartItems;
           this.totalCost = result.totalCost;
-
-          // Fetch product details for each item in the cart
-          this.cartItems.forEach((cartItem) => {
-            productService
-              .getProductById(cartItem.productId)
-              .then((productDetailsRes) => {
-                const productDetails = productDetailsRes.data;
-                // Assuming productDetails.products is an array of products
-                // You may need to adjust this based on your API response
-                this.products = productDetails.products;
-              })
-              .catch((err) => console.log('Error fetching product details', err));
-          });
         })
         .catch((err) => console.log('err', err));
     },
