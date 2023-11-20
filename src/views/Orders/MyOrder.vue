@@ -6,14 +6,18 @@
         <!-- <router-link :to="{ name: 'OrderDetails' }"> -->
         <h2>Order #{{ order.id }}</h2>
         <!-- </router-link> -->
-        <p class="order-info">Created Date: {{ order.createdDate }}</p>
+
+        <p class="order-info">Created Date: {{ formatDate(order.createdDate) }}</p>
+
         <p class="order-info">Total Price: ${{ order.totalPrice }}</p>
+
         <!-- <ul class="order-items">
           orders
           <li v-for="item in order.items" :key="item.id">
             {{ item.quantity }} x {{ item.product.name }} - ${{ item.price }}
           </li>
         </ul> -->
+
         <h6 class="card-title">
           <router-link v-bind:to="'/order/' + order.id">View Details</router-link>
         </h6>
@@ -42,6 +46,11 @@ export default {
 
   // FUNCTION RETRIEVE 3
   methods: {
+    formatDate(dateString) {
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const date = new Date(dateString);
+      return date.toLocaleDateString(undefined, options);
+    },
     // list of order histories
     async listOrders() {
       await orderService.getAllUserOrders(this.token).then(

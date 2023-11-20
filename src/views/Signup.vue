@@ -45,7 +45,7 @@
               <input type="password" v-model="confirmPassword" class="form-control" required />
             </div>
 
-            <button class="btn btn-primary mt-2">Create Account</button>
+            <button class="btn btn-primary mt-2 mb-4">Create Account</button>
           </form>
         </div>
       </div>

@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="conatiner">
+  <div class="container">
     <div class="row">
       <div class="col-12 justify-content-center d-flex flex-row pt-5">
         <div id="signin" class="flext-item border">
-          <h2 class="pt-4">Sign-In</h2>
+          <h2 class="pt-4 pl-4">Sign-In</h2>
           <form @submit="signin" class="form-group pt-4 pl-4 pr-4">
             <div class="form-group">
               <label>Email </label>
@@ -56,6 +56,9 @@ export default {
 };
 </script>
 <style scoped>
+input {
+  width: 100%;
+}
 .btn-primary {
   background-color: #f0c14b;
   color: black;

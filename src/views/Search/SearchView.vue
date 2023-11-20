@@ -10,12 +10,18 @@
       <label for="search" class="label">
         <span class="label-text pr-2">Search</span>
       </label>
-      <input id="search" type="text" v-model="filters.query" class="input input-bordered" />
+      <input
+        id="search"
+        type="text"
+        v-model="filters.query"
+        class="input input-bordered"
+        style="width: 50%"
+      />
     </div>
 
     <div class="form-control pt-3 pb-5 mr-3">
       <label for="filterCategory" class="label">
-        <span class="label-text pr-2">Filter by Category</span>
+        <span class="label-text pr-2">Category</span>
       </label>
       <select id="filterCategory" class="select select-bordered" v-model="filters.category">
         <option value="">All</option>

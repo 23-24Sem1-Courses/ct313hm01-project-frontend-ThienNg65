@@ -1,13 +1,11 @@
 <template>
   <div class="header navbar-dark bg-dark w-auto h-50">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }">
-      <h3>Apple Reseller</h3>
-    </router-link>
+    <router-link class="navbar-brand" :to="{ name: 'Home' }"> Apple Reseller </router-link>
 
     <nav class="navbar">
-      <router-link :to="{ name: 'Home' }">Home </router-link>
+      <router-link :to="{ name: 'Home' }">Home</router-link>
       <router-link :to="{ name: 'SearchView' }">Shop</router-link>
-      <router-link :to="{ name: 'WishList' }">Wishlist </router-link>
+      <router-link :to="{ name: 'WishList' }">Wishlist</router-link>
       <router-link :to="{ name: 'MyOrder' }">My Orders</router-link>
     </nav>
 
@@ -212,8 +210,8 @@ export default {
   }
 
   .header .navbar a {
-    font-size: 2rem;
-    margin: 2rem;
+    font-size: 1.5rem;
+    margin: 1rem;
     display: block;
   }
 
@@ -224,7 +222,7 @@ export default {
 
 @media (max-width: 576px) {
   .header .navbar a {
-    font-size: 1.5rem;
+    font-size: 0.5rem;
     margin: 0;
   }
 }
