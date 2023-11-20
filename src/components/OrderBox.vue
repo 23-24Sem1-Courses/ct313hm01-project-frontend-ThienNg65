@@ -14,7 +14,7 @@
 
         <!-- <select class="form-control" v-model="order.deliveryStatus" @change="filterOrders(order.deliveryStatus)"> -->
         <select class="form-control" v-model="order.deliveryStatus">
-          <option value="all">All</option>
+          <!-- <option value="all">All</option> -->
           <option value="pending">Pending</option>
           <option value="shipped">Shipped</option>
           <option value="delivered">Delivered</option>

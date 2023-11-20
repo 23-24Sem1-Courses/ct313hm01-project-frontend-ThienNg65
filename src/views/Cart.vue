@@ -15,16 +15,12 @@
       class="row mt-2 pt-3 justify-content-around"
     >
       <div class="col-2"></div>
-      <div
-        v-for="product in products"
-        :key="product.id"
-        class="col-md-3 embed-responsive embed-responsive-16by9"
-      >
+      <div class="col-md-3 embed-responsive embed-responsive-16by9">
         <img
-          :src="product.imageUrl"
+          :src="cartItem.imageUrl"
           alt=""
           class="w-100 card-image-top embed-responsive-item"
-          style="object-fit: cover"
+          style="object-fit: contain"
         />
       </div>
 

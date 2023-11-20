@@ -5,17 +5,27 @@
     <div v-if="orderItems.length > 0" class="order-items-container d-flex justify-content-center">
       <div v-for="orderItem in orderItems" :key="orderItem.id" class="order-item">
         <!-- <div class="item-details"> -->
-        <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image col-lg" />
+        <div class="col-md">
+          <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image col-lg" />
+        </div>
 
-        <router-link
-          class="text-dark"
-          :to="{ name: 'ShowDetails', params: { id: orderItem.product.id } }"
-        >
-          <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
-        </router-link>
+        <div class="col-sm">
+          <router-link
+            class="text-dark"
+            :to="{ name: 'ShowDetails', params: { id: orderItem.product.id } }"
+          >
+            <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
+          </router-link>
+        </div>
 
-        <p class="ml-5 col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
-        <p class="col-sm d-flex">Price: ${{ orderItem.price }}</p>
+        <div class="col-sm">
+          <p class="ml-5 col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
+        </div>
+
+        <div class="col-sm">
+          <p class="col-sm d-flex">Price: ${{ orderItem.price }}</p>
+        </div>
+
         <!-- </div> -->
       </div>
     </div>
@@ -93,6 +103,7 @@ export default {
   width: 80px;
   height: 80px;
   margin-right: 20px;
+  object-fit: contain;
 }
 
 .item-details {
