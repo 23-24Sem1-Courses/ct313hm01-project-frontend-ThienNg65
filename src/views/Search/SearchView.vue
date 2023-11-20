@@ -14,7 +14,7 @@
         id="search"
         type="text"
         v-model="filters.query"
-        class="input input-bordered"
+        class="input input-bordered rounded"
         style="width: 50%"
       />
     </div>
@@ -23,7 +23,7 @@
       <label for="filterCategory" class="label">
         <span class="label-text pr-2">Category</span>
       </label>
-      <select id="filterCategory" class="select select-bordered" v-model="filters.category">
+      <select id="filterCategory" class="select select-bordered rounded" v-model="filters.category">
         <option value="">All</option>
         <option v-for="category in categories" :value="category.name" :key="category.id">
           {{ category.name }}
@@ -36,7 +36,7 @@
         <span class="label-text pr-2">Order by</span>
       </label>
 
-      <select id="orderBy" class="select select-bordered" v-model="filters.order">
+      <select id="orderBy" class="select select-bordered rounded" v-model="filters.order">
         <option value="name">Name</option>
         <option value="price">Price Asc</option>
         <option value="-price">Price Dec</option>
