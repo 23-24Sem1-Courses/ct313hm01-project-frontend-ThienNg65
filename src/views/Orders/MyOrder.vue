@@ -18,6 +18,10 @@
           </li>
         </ul> -->
 
+        <p class="order-info">
+          Status: <b>{{ order.deliveryStatus }}</b>
+        </p>
+
         <h6 class="card-title">
           <router-link v-bind:to="'/order/' + order.id">View Details</router-link>
         </h6>
