@@ -11,9 +11,7 @@
         <h4>{{ product.name }}</h4>
         <h6 class="catgory font-italic">{{ category.categoryName }}</h6>
         <h6 class="font-weight-bold">$ {{ product.price }}</h6>
-        <p>
-          {{ product.description }}
-        </p>
+
         <div class="d-flex flex-row justify-content-between">
           <div class="input-group col-md-3 col-4 p-0">
             <div class="input-group-prepend">
@@ -28,13 +26,9 @@
         </div>
         <div class="features pt-3">
           <h5><strong>Features</strong></h5>
-          <ul>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Officia quas, officiis eius magni error magnam voluptatem</li>
-            <li>nesciunt quod! Earum voluptatibus quaerat dolorem doloribus</li>
-            <li>molestias ipsum ab, ipsa consectetur laboriosam soluta et</li>
-            <li>ut doloremque dolore corrupti, architecto iusto beatae.</li>
-          </ul>
+          <p>
+            {{ product.description }}
+          </p>
         </div>
         <button id="wishlist-button" class="btn mr-3 p-1 py-0" @click="addToWishlist()">
           {{ wishListString }}

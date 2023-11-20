@@ -5,8 +5,9 @@
     <div v-if="orderItems.length > 0" class="order-items-container d-flex justify-content-center">
       <div v-for="orderItem in orderItems" :key="orderItem.id" class="order-item">
         <!-- <div class="item-details"> -->
-        <div class="col-md">
-          <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image col-lg" />
+        <div class="col-sm-1"></div>
+        <div class="col-sm">
+          <img :src="orderItem.product.imageUrl" alt="Product Image" class="product-image" />
         </div>
 
         <div class="col-sm">
@@ -14,16 +15,16 @@
             class="text-dark"
             :to="{ name: 'ShowDetails', params: { id: orderItem.product.id } }"
           >
-            <h5 class="col-sm d-flex">{{ orderItem.product.name }}</h5>
+            <p class="product-name d-flex">{{ orderItem.product.name }}</p>
           </router-link>
         </div>
 
         <div class="col-sm">
-          <p class="ml-5 col-sm d-flex">Quantity: {{ orderItem.quantity }}</p>
+          <p class="d-flex">Quantity: {{ orderItem.quantity }}</p>
         </div>
 
         <div class="col-sm">
-          <p class="col-sm d-flex">Price: ${{ orderItem.price }}</p>
+          <p class="d-flex">Price: ${{ orderItem.price }}</p>
         </div>
 
         <!-- </div> -->
@@ -108,5 +109,9 @@ export default {
 
 .item-details {
   flex-grow: 1;
+}
+
+.product-name {
+  font-weight: bold;
 }
 </style>
