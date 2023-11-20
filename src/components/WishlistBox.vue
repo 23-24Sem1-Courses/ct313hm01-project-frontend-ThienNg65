@@ -8,6 +8,8 @@
       />
     </div>
 
+    <a href="#" class="text-right px-3" @click="deleteWishlistItem">Remove</a>
+
     <div class="card-body">
       <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }">
         <h5 class="card-title">{{ product.name }}</h5>
@@ -26,10 +28,26 @@
 <script>
 export default {
   name: 'ProductBox',
-  props: ['product']
+  props: ['product'],
+  methods: {
+    deleteWishlistItem() {
+      this.$emit('onDeleteWishlistItem');
+    }
+  }
 };
 </script>
 <style scoped>
+.card {
+  height: 24rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
 .card-img-top {
   object-fit: contain;
 }

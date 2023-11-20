@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h3 class="pt-3">Our Categories</h3>
+        <h4 class="pt-3">Our Categories</h4>
         <router-link :to="{ name: 'AddCategory' }">
           <button class="btn" style="float: right">Add Category</button>
         </router-link>
@@ -26,11 +26,7 @@ export default {
   name: 'Category',
   props: ['categories'],
   components: { CategoryBox },
-  data() {
-    return {
-      baseURL: 'https://limitless-lake-55070.herokuapp.com'
-    };
-  },
+  data() {},
   methods: {},
   mounted() {}
 };

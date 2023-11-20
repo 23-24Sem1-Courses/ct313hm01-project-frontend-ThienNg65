@@ -1,12 +1,12 @@
 
 import { createWebHistory, createRouter } from 'vue-router';
 import Home from '../views/HomeView.vue';
-import About from '../views/AboutView.vue';
+
 import AddCategory from '../views/Category/AddCategory.vue';
 import Category from '../views/Category/Category.vue';
 import EditCategory from "../views/Category/EditCategory.vue"
 import Product from '../views/Product/Product.vue';
-import Admin from "../views/Admin.vue";
+import Admin from '../views/Admin/Admin.vue'
 import AddProduct from "../views/Product/AddProduct.vue";
 import EditProduct from "../views/Product/EditProduct.vue";
 import ShowDetails from "../views/Product/ShowDetails.vue";
@@ -21,6 +21,13 @@ import Failed from '../views/payment/Failed.vue'
 
 import Checkout from '../views/Checkout/Checkout.vue'
 
+import SearchView from '../views/Search/SearchView.vue'
+
+import MyOrder from '../views/Orders/MyOrder.vue'
+import OrderDetails from '../views/Orders/OrderDetails.vue'
+
+import OrderBox from '../components/OrderBox.vue'
+
 const routes = [
   {
     path: '/',
@@ -28,9 +35,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/search',
+    name: 'SearchView',
+    component: SearchView
   },
 
   // category detail page
@@ -65,7 +72,7 @@ const routes = [
   },
   {
     path: '/admin/product',
-    name: 'AdminProduct',
+    name: 'Product',
     component: Product
   },
 
@@ -88,6 +95,13 @@ const routes = [
     path: '/admin/product/detail/:id',
     name: 'ShowDetails',
     component: ShowDetails
+  },
+
+  // Order admin
+  {
+    path: '/admin/order/all',
+    name: 'OrderBox',
+    component: OrderBox
   },
 
 
@@ -132,6 +146,19 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout,
+  },
+
+
+  // ORDER
+  {
+    path: '/order',
+    name: 'MyOrder',
+    component: MyOrder,
+  },
+  {
+    path: '/order/:id',
+    name: 'OrderDetails',
+    component: OrderDetails,
   },
 
 ]

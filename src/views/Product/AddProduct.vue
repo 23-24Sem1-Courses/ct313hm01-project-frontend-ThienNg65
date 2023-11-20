@@ -13,7 +13,7 @@
             <label>Category</label>
             <select class="form-control" v-model="categoryId" required>
               <option v-for="category in categories" :key="category.id" :value="category.id">
-                {{ category.categoryName }}
+                {{ category.name }}
               </option>
             </select>
           </div>
@@ -27,7 +27,7 @@
           </div>
           <div class="form-group">
             <label>Image Url</label>
-            <input type="text" v-model="imageURL" class="form-control" />
+            <input type="text" v-model="imageUrl" class="form-control" />
           </div>
           <div class="form-group">
             <label>Price</label>
@@ -43,34 +43,36 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
 import swal from 'sweetalert';
+import productService from '../../services/product.service';
 export default {
-  props: ['baseURL', 'categories'],
+  props: ['categories'],
   data() {
     return {
       id: null,
       categoryId: null,
       name: null,
       description: null,
-      imageURL: null,
+      imageUrl: null,
       price: null
     };
   },
   methods: {
-    addProduct() {
+    async addProduct() {
+      // Create new product model
       const newProduct = {
         categoryId: this.categoryId,
         description: this.description,
         name: this.name,
-        imageURL: this.imageURL,
+        imageUrl: this.imageUrl,
         price: this.price
       };
-
-      axios
-        .post(this.baseURL + 'product/add', newProduct)
+      // get token from local cache
+      const token = localStorage.getItem('token');
+      await productService
+        .addProduct(newProduct, token)
         .then(() => {
-          this.$router.push({ name: 'AdminProduct' });
+          this.$router.push({ name: 'Product' });
           swal({
             text: 'Product added',
             icon: 'success'

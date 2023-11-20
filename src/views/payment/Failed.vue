@@ -1,10 +1,17 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="text-center">
-    <h1>Failed</h1>
+    <div class="spinner-grow text-danger" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'FailedPayment',
+  mounted() {
+    localStorage.removeItem('sessionId');
+    window.location.href = '/order';
+  }
+};
 </script>

@@ -4,16 +4,14 @@
       <div class="col-md-1"></div>
       <!--            display image-->
       <div class="col-md-4 col-12">
-        <img :src="product.imageURL" class="img-fluid" />
+        <img :src="product.imageUrl" class="img-fluid" />
       </div>
       <!--            display product details-->
       <div class="col-md-6 col-12 pt-3 pt-md-0">
         <h4>{{ product.name }}</h4>
         <h6 class="catgory font-italic">{{ category.categoryName }}</h6>
         <h6 class="font-weight-bold">$ {{ product.price }}</h6>
-        <p>
-          {{ product.description }}
-        </p>
+
         <div class="d-flex flex-row justify-content-between">
           <div class="input-group col-md-3 col-4 p-0">
             <div class="input-group-prepend">
@@ -28,13 +26,9 @@
         </div>
         <div class="features pt-3">
           <h5><strong>Features</strong></h5>
-          <ul>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Officia quas, officiis eius magni error magnam voluptatem</li>
-            <li>nesciunt quod! Earum voluptatibus quaerat dolorem doloribus</li>
-            <li>molestias ipsum ab, ipsa consectetur laboriosam soluta et</li>
-            <li>ut doloremque dolore corrupti, architecto iusto beatae.</li>
-          </ul>
+          <p>
+            {{ product.description }}
+          </p>
         </div>
         <button id="wishlist-button" class="btn mr-3 p-1 py-0" @click="addToWishlist()">
           {{ wishListString }}
@@ -44,42 +38,56 @@
   </div>
 </template>
 <script>
-import swal from 'sweetalert';
-import axios from 'axios';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+const $toast = useToast();
+
+import wishlistService from '../../services/wishlist.service';
+import cartService from '../../services/cart.service';
 export default {
+  name: 'ShowDetails',
   data() {
     return {
       product: {},
       category: {},
+      id: null,
+      token: null,
+      isAddedToWishlist: false,
       quantity: 1,
       wishListString: 'Add to wishlist'
     };
   },
-  props: ['baseURL', 'products', 'categories'],
+  props: ['products', 'categories'],
   methods: {
-    addToWishlist() {
+    async addToWishlist() {
       if (!this.token) {
         // user is not logged in
         // show some error
-        swal({
-          text: 'please login to add item in wishlist',
-          icon: 'error'
+        $toast.error('Please login to proceed!', {
+          // override the global option
+          position: 'top-right'
         });
         return;
       }
+      // params
+      const wishlistItem = {
+        productId: this.product.id
+      };
       // add item to wishlist
-      axios
-        .post(`${this.baseURL}wishlist/add?token=${this.token}`, {
-          id: this.product.id
-        })
-        .then((res) => {
-          if (res.status === 201) {
-            this.wishListString = 'Added to Wishlist';
-            swal({
-              text: 'Added to Wishlist',
-              icon: 'success'
-            });
-          }
+      await wishlistService
+        .addWishList(wishlistItem, this.token)
+        .then(() => {
+          // if (res.status === 201) {
+          //   this.wishListString = 'Added to Wishlist';
+          //   $toast.success('Product added to your wishlist', {
+          //     // override the global option
+          //     position: 'top-right'
+          //   });
+          // }
+          $toast.success('Product added to your wishlist', {
+            // override the global option
+            position: 'top-right'
+          });
         })
         .catch((err) => {
           console.log('err', err);
@@ -92,28 +100,34 @@ export default {
       if (!this.token) {
         // user is not logged in
         // show some error
-        swal({
-          text: 'please login to add item in cart',
-          icon: 'error'
+        $toast.error('Please login to proceed', {
+          // override the global option
+          position: 'top-right'
         });
         return;
       }
 
-      // add to cart
+      const cartItem = {
+        productId: this.product.id,
+        quantity: this.quantity
+      };
 
-      axios
-        .post(`${this.baseURL}/cart/add?token=${this.token}`, {
-          productId: this.id,
-          quantity: this.quantity
-        })
-        .then((res) => {
-          if (res.status == 201) {
-            swal({
-              text: 'Product added in cart',
-              icon: 'success'
-            });
-            this.$emit('fetchData');
-          }
+      // add to cart
+      cartService
+        .addToCart(cartItem, this.token)
+        .then(() => {
+          // if (res.status == 201) {
+          //   $toast.success('Product added to your cart', {
+          //     // override the global option
+          //     position: 'top-right'
+          //   });
+          //   this.$emit('fetchData');
+          // }
+          $toast.success('Product added to your cart', {
+            // override the global option
+            position: 'top-right'
+          });
+          this.$emit('fetchData');
         })
         .catch((err) => console.log('err', err));
     }
@@ -126,7 +140,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .category {
   font-weight: 400;
 }

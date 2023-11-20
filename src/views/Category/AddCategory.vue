@@ -29,9 +29,7 @@
   </div>
 </template>
 <script>
-// const axios = require('axios');
-import axios from 'axios';
-// const sweetalert = require('sweetalert');
+import categoryService from '../../services/category.service';
 import sweetalert from 'sweetalert';
 export default {
   data() {
@@ -42,24 +40,17 @@ export default {
     };
   },
   methods: {
-    addCategory() {
+    async addCategory() {
       console.log(this.categoryName, this.description);
       const newCategory = {
-        categoryName: this.categoryName,
+        name: this.categoryName,
         description: this.description,
         imageUrl: this.imageUrl
       };
-
-      const baseURL = 'https://limitless-lake-55070.herokuapp.com';
-
-      axios({
-        method: 'post',
-        url: `${baseURL}/category/create`,
-        data: JSON.stringify(newCategory),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      // token
+      const token = localStorage.getItem('token');
+      await categoryService
+        .createCategory(token, newCategory)
         .then(() => {
           sweetalert({
             text: 'Category added successfully',

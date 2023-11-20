@@ -3,7 +3,6 @@
   <router-view
     v-if="categories && products"
     style="min-height: 60vh"
-    :baseURL="baseURL"
     :categories="categories"
     :products="products"
     @fetchData="fetchData"
@@ -16,14 +15,15 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
-import axios from 'axios';
+import categoryService from './services/category.service';
+import productService from './services/product.service';
+import cartService from './services/cart.service';
+
 export default {
   // eslint-disable-next-line vue/no-reserved-component-names
   components: { Navbar, Footer },
   data() {
     return {
-      baseURL: 'https://limitless-lake-55070.herokuapp.com/',
-      // baseURL: 'http://localhost:8080/',
       products: null,
       categories: null,
       cartCount: 0
@@ -32,8 +32,8 @@ export default {
   methods: {
     async fetchData() {
       // api call to get all the categories
-      await axios
-        .get(this.baseURL + 'category/')
+      await categoryService
+        .getAllCategories()
         .then((res) => {
           this.categories = res.data;
         })
@@ -41,8 +41,8 @@ export default {
 
       // api call to get the products
 
-      await axios
-        .get(this.baseURL + 'product/')
+      await productService
+        .getAllProducts()
         .then((res) => {
           this.products = res.data;
         })
@@ -50,13 +50,15 @@ export default {
 
       // fetch cart item if token is present i.e logged in
       if (this.token) {
-        axios
-          .get(`${this.baseURL}cart/?token=${this.token}`)
+        await cartService
+          .getCartItems(this.token)
           .then((res) => {
             const result = res.data;
             this.cartCount = result.cartItems.length;
           })
-          .catch((err) => console.log('err', err));
+          .catch(() => {
+            this.cartCount = 0;
+          });
       }
     },
     resetCartCount() {

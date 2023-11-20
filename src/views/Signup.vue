@@ -45,7 +45,7 @@
               <input type="password" v-model="confirmPassword" class="form-control" required />
             </div>
 
-            <button class="btn btn-primary mt-2">Create Account</button>
+            <button class="btn btn-primary mt-2 mb-4">Create Account</button>
           </form>
         </div>
       </div>
@@ -55,10 +55,10 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import authService from '../services/auth.service';
 import swal from 'sweetalert';
 export default {
-  props: ['baseURL'],
+  props: [],
   data() {
     return {
       email: null,
@@ -73,19 +73,19 @@ export default {
       e.preventDefault();
       if (this.password === this.confirmPassword) {
         // call signup api
+        // TODO : add more information
         const user = {
           email: this.email,
           firstName: this.firstName,
           lastName: this.lastName,
           password: this.password
         };
-        console.log('user', user);
-        await axios
-          .post(`${this.baseURL}user/signup`, user)
+        await authService
+          .register(user)
           .then(() => {
             this.$router.replace('/');
             swal({
-              text: 'User signup successful, please login',
+              text: 'User register successful, please login',
               icon: 'success'
             });
           })

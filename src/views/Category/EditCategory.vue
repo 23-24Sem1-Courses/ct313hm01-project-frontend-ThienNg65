@@ -11,7 +11,7 @@
         <form v-if="category">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" class="form-control" v-model="category.categoryName" required />
+            <input type="text" class="form-control" v-model="category.name" required />
           </div>
           <div class="form-group">
             <label>Description</label>
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+import categoryService from '../../services/category.service';
 import swal from 'sweetalert';
 export default {
   data() {
@@ -38,13 +38,13 @@ export default {
       id: null
     };
   },
-  props: ['baseURL', 'categories'],
+  props: ['categories'],
   methods: {
     async editCategory() {
       delete this.category['products'];
       console.log('category', this.category);
-      await axios
-        .post(`${this.baseURL}category/update/${this.id}`, this.category)
+      await categoryService
+        .updateCategory(this.category.id, localStorage.getItem('token'), this.category)
         .then(() => {
           this.$emit('fetchData');
           this.$router.push({ name: 'Category' });

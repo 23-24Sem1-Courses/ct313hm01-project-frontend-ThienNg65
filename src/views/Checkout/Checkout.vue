@@ -12,11 +12,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import cartService from '../../services/cart.service';
+import orderService from '../../services/order.service';
 export default {
   data() {
     return {
-      stripeAPIToken: '<stripe token>',
+      stripeAPIToken:
+        'pk_test_51OARwyBDtE4vqaav2TrMIjYAg9NeVmhBnftzmlgEq5afxHZOvulucazbXdgRaF1qCwzl4LcenwWq4g9z2mdWKSh600BBeIkMCw',
       stripe: '',
       token: null,
       checkoutBodyArray: []
@@ -24,33 +26,38 @@ export default {
   },
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Checkout',
-  props: ['baseURL'],
+  props: [],
   methods: {
-    getAllItems() {
-      axios
-        .get(`${this.baseURL}cart/?token=${this.token}`)
+    async getAllItems() {
+      // Get all data from current cart
+      await cartService
+        .getCartItems(this.token)
         .then((response) => {
+          console.log(response.data);
           if (response.status == 200) {
             let products = response.data;
             for (let i = 0; i < products.cartItems.length; i++) {
               this.checkoutBodyArray.push({
-                price: products.cartItems[i].product.price,
+                price: products.cartItems[i].price,
                 quantity: products.cartItems[i].quantity,
-                productName: products.cartItems[i].product.name,
-                productId: products.cartItems[i].product.id
+                productName: products.cartItems[i].name,
+                productId: products.cartItems[i].id
               });
             }
           }
         })
         .catch((err) => console.log(err));
     },
-    goToCheckout() {
+    async goToCheckout() {
       console.log('checkoutBodyArray', this.checkoutBodyArray);
-      axios
-        .post(`${this.baseURL}order/create-checkout-session`, this.checkoutBodyArray)
+
+      await orderService
+        .checkoutList(this.checkoutBodyArray, this.token)
         .then((response) => {
+          // Store checkout session key
           localStorage.setItem('sessionId', response.data.sessionId);
-          console.log('session', response.data);
+
+          // Wait for the payment
           this.stripe.redirectToCheckout({
             sessionId: response.data.sessionId
           });
