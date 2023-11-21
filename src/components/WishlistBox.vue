@@ -16,6 +16,7 @@
       </router-link>
 
       <p class="card-text">{{ product.description.substring(0, 65) }}...</p>
+      <p class="card-text">${{ product.price }}</p>
       <router-link
         :to="{ name: 'EditProduct', params: { id: product.id } }"
         v-show="$route.name == 'Product'"

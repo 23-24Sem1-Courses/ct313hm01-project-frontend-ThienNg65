@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <!--      display products-->
+      <!-- display products-->
       <div class="row">
         <div v-for="index in this.productSize" :key="index" class="col-md-6 col-lg-4 col-12">
           <ProductBox class="ProductBox" :product="products[index - 1]" />
