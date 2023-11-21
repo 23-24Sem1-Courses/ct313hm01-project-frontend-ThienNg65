@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h4 class="pt-3">{{ category.categoryName }}</h4>
+        <h4 class="pt-3">{{ category.name }}</h4>
         <h5 style="font-weight: 300; color: #686868">{{ msg }}</h5>
       </div>
     </div>
